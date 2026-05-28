@@ -2,4 +2,6 @@
 
 Static Big Data Analytics exam notes site.
 
-Open `index.html` locally, or publish this repository with GitHub Pages from the `main` branch root.
+Live site: https://lucenity0.github.io/bdanotes/
+
+Open `index.html` locally, or use the GitHub Pages workflow in this repository.
