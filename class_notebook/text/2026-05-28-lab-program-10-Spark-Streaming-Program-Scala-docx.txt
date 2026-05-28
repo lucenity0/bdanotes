@@ -1,0 +1,53 @@
+lab program 10 Spark Streaming
+Program (Scala).docx
+
+Exported: May 28, 2026
+
+
+
+
+Summary
+This program demonstrates how to process live data using Spark Streaming to
+perform   automated      natural      language             processing           on    incoming     text.   By
+establishing a connection to a local network port, the system captures raw strings
+and subjects them to a multi-stage cleaning pipeline that removes noise like
+punctuation and common stop words. The script further refines the data through
+basic lemmatization, which strips suffixes from words to reveal their underlying
+roots in real-time. Ultimately, the code serves as a functional template for
+transforming a chaotic stream of words into a standardized, readable format that
+is immediately displayed on the console.
+
+Keywords: Spark Streaming, Scala programming, Text data cleaning, Socket data
+source, Real-time processing
+
+
+
+Content
+Spark Streaming Program (Scala)import org.apache.spark.sql.SparkSessionimport
+org.apache.spark.sql.functions._//             Create           Spark          Sessionval      spark       =
+SparkSession.builder .appName(“TextCleaningStream”) .master(“local[*]”) .getOrCreate()import
+spark.implicits._//     Read        streaming             data        from       socketval        lines    =
+spark.readStream      .format(“socket”)         .option(“host”,              “localhost”)   .option(“port”,
+9999) .load()// Convert to Dataset[String]val words = lines.as[String]// Define simple
+stop wordsval stopWords = Seq(“is”, “the”, “a”, “an”, “and”, “to”)// Cleaning
+functionval   cleaned     =    words.map         {       line    =>     //    Lowercase     val    lower   =
+line.toLowerCase // Remove extra spaces val noSpace = lower.trim.replaceAll(“\s+”,
+” “) // Remove punctuation val noPunct = noSpace.replaceAll(”[^a-zA-Z ]“,”“) //
+Remove     stop   words       val   filtered     =       noPunct.split(”         “)   .filter(word    =>    !
+stopWords.contains(word)) // Simple lemmatization (basic example) val lemmatized
+= filtered.map { case w if w.endsWith(”ing”) => w.dropRight(3) case w if
+
+
+
+                                                     1
+w.endsWith(“ed”) => w.dropRight(2) case w => w } lemmatized.mkString(” “)}//
+Output              to              consoleval              query               =
+cleaned.writeStream .outputMode(”append”) .format(“console”) .start()query.awaitTermination()
+How to RunStart Spark applicationOpen terminal and run:nc -lk 9999Type text →
+cleaned output appears in Spark console
+
+
+
+
+                                          2
+

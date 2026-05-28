@@ -1,0 +1,88 @@
+Wordcountprogram.docx
+
+Exported: May 28, 2026
+
+
+
+
+Summary
+This technical guide outlines the implementation of a Hadoop MapReduce
+application designed to calculate the frequency of words within a text file. The
+process is organized into three distinct Java classes: a Mapper to tokenize strings
+into individual units, a Reducer to aggregate those units into final counts, and a
+Driver to orchestrate the entire execution. Beyond the programming logic, the
+document provides essential HDFS commands for managing data storage and
+executing the compiled JAR file within a distributed environment. Ultimately, the
+source serves as a practical blueprint for performing distributed data processing
+by transforming raw unstructured text into a structured summary of word
+occurrences.
+
+Keywords: Java Class Creation, MapReduce Programming, Hadoop File System,
+Word Count Logic, HDFS Command Execution
+
+
+
+Content
+.Create Three Java Classes into the project. Name them WCDriver(having the main
+function),       WCMapper,          WCReducer.//         Importing        librariesimport
+java.io.IOException;import                      org.apache.hadoop.io.IntWritable;import
+org.apache.hadoop.io.LongWritable;import               org.apache.hadoop.io.Text;import
+org.apache.hadoop.mapred.MapReduceBase;import
+org.apache.hadoop.mapred.Mapper;import
+org.apache.hadoop.mapred.OutputCollector;import
+org.apache.hadoop.mapred.Reporter;public             class     WCMapper           extends
+MapReduceBase implements Mapper<LongWritable,Text, Text, IntWritable> { // Map
+function public void map(LongWritable key, Text value, OutputCollector<Text,
+IntWritable>   output,   Reporter    rep)   throws    IOException    {   String   line   =
+value.toString(); // Splitting the line on spaces for (String word : line.split(” “)) { if
+(word.length() > 0) { output.collect(new Text(word), new IntWritable(1)); } } }}
+Reducer Code: You have to copy paste this program into the WCReducer Java Class
+
+
+
+                                            1
+file. // Importing librariesimport java.io.IOException;import java.util.Iterator;import
+org.apache.hadoop.io.IntWritable;import                  org.apache.hadoop.io.Text;import
+org.apache.hadoop.mapred.MapReduceBase;import
+org.apache.hadoop.mapred.OutputCollector;import
+org.apache.hadoop.mapred.Reducer;import
+org.apache.hadoop.mapred.Reporter;public               class       WCReducer           extends
+MapReduceBase implements Reducer<Text,IntWritable, Text, IntWritable> { //
+Reduce   function   public    void   reduce(Text   key,        Iterator<IntWritable>    value,
+OutputCollector<Text, IntWritable> output, Reporter rep) throws IOException { int
+count = 0; // Counting the frequency of each words while (value.hasNext())
+{ IntWritable i = value.next(); count += i.get(); } output.collect(key, new
+IntWritable(count)); }}Driver Code: You have to copy paste this program into the
+WCDriver Java Class file.// Importing librariesimport java.io.IOException;import
+org.apache.hadoop.conf.Configured;import                org.apache.hadoop.fs.Path;import
+org.apache.hadoop.io.IntWritable;import                  org.apache.hadoop.io.Text;import
+org.apache.hadoop.mapred.FileInputFormat;import
+org.apache.hadoop.mapred.FileOutputFormat;import
+org.apache.hadoop.mapred.JobClient;import
+org.apache.hadoop.mapred.JobConf;import                 org.apache.hadoop.util.Tool;import
+org.apache.hadoop.util.ToolRunner;public       class     WCDriver      extends   Configured
+implements Tool { public int run(String args[]) throws IOException { if (args.length <
+2) { System.out.println(”Please give valid inputs”); return -1; } JobConf conf = new
+JobConf(WCDriver.class);     FileInputFormat.setInputPaths(conf,        new   Path(args[0]));
+FileOutputFormat.setOutputPath(conf,                     new                  Path(args[1]));
+conf.setMapperClass(WCMapper.class);           conf.setReducerClass(WCReducer.class);
+conf.setMapOutputKeyClass(Text.class);
+conf.setMapOutputValueClass(IntWritable.class); conf.setOutputKeyClass(Text.class);
+conf.setOutputValueClass(IntWritable.class); JobClient.runJob(conf); return 0; } //
+Main Method public static void main(String args[]) throws Exception { int exitCode =
+ToolRunner.run(new WCDriver(), args); System.out.println(exitCode); }} 3. create a
+file on Desktop(sample.txt) and type the below lines:hi how are youhow is your
+jobhow is your familyhow is your brotherhow is your sistersave your file in /home/
+hadoop/input 5. View the directory contenthadoop fs -ls /6. Create a directory using
+the following command. If any directory existing, use the same directory for the
+command hadoop fs -mkdir /inputbda7. Copy the file into HDFS hadoop fs -
+copyFromLocal /input/sample.txt /inputbda orhadoop fs –put /input/sample.txt /
+inputbdahadoop fs -ls /inputbda8.Run the Map Reduce Programhadoop jar /home/
+hduser/Desktop/wordcount.jar WCDriver /inputbda/sample.txt /outputbda9. hadoop
+fs -ls /outputbda10. hadoop fs -cat /outputbda/part-00000
+
+
+
+
+                                           2
+

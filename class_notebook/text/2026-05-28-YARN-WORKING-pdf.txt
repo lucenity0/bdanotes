@@ -1,0 +1,171 @@
+YARN WORKING .pdf
+
+Exported: May 28, 2026
+
+
+
+
+Summary
+This text serves as a conceptual guide to how YARN manages and executes
+distributed computing jobs by using a WordCount program as a practical
+demonstration. The workflow begins when a user submits an application, which is
+then broken down into individual tasks that run within isolated resource units
+called containers. To ensure efficiency, a central Resource Manager coordinates
+with an Application Master to distribute these tasks across various nodes,
+prioritizing data locality to minimize network congestion. Ultimately, the source
+clarifies the distinct responsibilities of each architectural component, illustrating how
+they collaborate to allocate hardware resources and monitor task completion
+across a cluster.
+
+Keywords: YARN Job Allocation, Resource Manager, Application Master, Container
+Management, Data Locality
+
+
+
+Content
+How YARN Allocates Jobs – Explained with Example
+Understand job (application) allocation in YARN with a simple WordCount example
+1 Key Terms
+Job (Application)
+A program submitted by the user Words.a.Cotint, Log Analysis).
+In YARN, this is called an Application.
+Task
+A job is divided into tasks.
+Example (WordCount): 4 Map tasks |+1| Reduce task c = 5 tasks total
+Container
+A resource unit (CPU + Memory) where a task runs.
+Example: 2 GB RAM + 1 CPU
+3 User Submits a Job
+WordCount Job Submitted
+
+
+
+                                           1
+Input file size = 1 GB
+↓
+HDFS splits file into 4 blocks
+Block1
+Block2
+Block3
+↓
+Block4
+Example Cluster
+Node1
+(Node Manager)
+4 GB RAM
+2 Containers
+Resource Manager
+Node2
+(Node Manager)
+4 GB RAM
+2 Containers
+Node3
+(Node Manager)
+Total containers in cluster = 6
+4 Step 1: Resource Manager Starts
+Application Master
+Node1
+Container 1
+Application
+Master
+Container 2
+Free
+Node2
+Container 1
+Free
+Container 2
+Free
+4 GB RAM
+2 Containers
+Node3
+Container 1
+Free
+Container 2
+Free
+
+
+                                    2
+MapReduce creates tasks:
+4 Map tasks (one for each block)
+1 Reduce task
+Total tasks
+=5
+Step 2: Application Master
+Requests Containers
+Application Master asks Resource Manager:
+“I need 5 containers for
+4 Map tasks and 1 Reduce task”
+The first container is used to launch the Application Master.
+6 Step 3: Resource Manager Allocates Containers
+Scheduler distributes 5 containers across the nodes:
+Node1
+Container 1
+Application
+Master
+Node2
+Node3
+Container 1
+Map Task 2
+Container 1
+Map Task 4
+Container 2
+Map Task 1
+Container 2
+Map Task 3
+Container 2
+Reduce Task
+Map Tasks Complete
+Step 4: Node Managers Start Tasks
+Node Managers launch the containers
+and run the tasks.
+Each node reports status to the
+Application Master.
+8 Step 5: Tasks Finish
+Data Locality (Important)
+YARN tries to run tasks on the nodes where data blocks are stored to reduce
+network traffic.
+So Map tasks are preferably
+scheduled as:
+
+
+                                           3
+Node1 Map Task for Block1
+Node2 Map Task for Block2
+Example block placement:
+Node2 Map Task for Block3
+Node3 Map Task for Block4
+Shuffle & Sort
+↓
+Who Does What?
+Reduce Task Runs
+Component
+Responsibility
+Client
+Submits the job (application)
+Final Flow
+Client
+Resource Manager
+↓
+↓
+Resource Manager
+Allocates containers to applications
+Application Master
+Output written to HDFS
+Application Master
+Requests containers and monitors
+job progress
+Resource Manager
+allocates containers
+Node Managers start
+Node Manager
+Starts and stops containers, runs tasks
+Container
+Executes a single task
+containers
+Tasks execute
+
+
+
+
+                                          4
+

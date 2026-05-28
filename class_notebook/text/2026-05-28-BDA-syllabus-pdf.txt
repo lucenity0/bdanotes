@@ -1,0 +1,95 @@
+BDA syllabus.pdf
+
+Exported: May 28, 2026
+
+
+
+
+Summary
+This document outlines the academic syllabus and laboratory plan for a sixth-
+semester course in Big Data Analytics at BMS College of Engineering. The
+curriculum is structured into five units that guide students from the fundamentals of
+digital data types through the practical use of NoSQL databases like MongoDB
+and Cassandra, eventually mastering distributed processing with Hadoop and
+Apache Spark. Students are expected to achieve specific learning outcomes by
+engaging in hands-on programming tasks, such as managing large-scale datasets
+and implementing MapReduce algorithms. Evaluation is conducted through a
+balanced assessment framework consisting of internal tests, a laboratory
+examination, and a final comprehensive theory paper that tests various cognitive
+levels of understanding.
+
+Keywords: Big Data Analytics, NoSQL Databases, Hadoop HDFS MapReduce,
+Apache Spark RDD, Scala Programming Language
+
+
+
+Content
+BMS COLLEGE OF ENGINEERING, BANGALORE-19
+(Autonomous College under VTU Belagavi)
+DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING
+Prescribed Text Books:
+168
+BMS COLLEGE OF ENGINEERING, BANGALORE-19
+(Autonomous College under VTU Belagavi)
+DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING
+Reference Text Books:
+E-Book:
+MOOC Courses:
+169
+BMS COLLEGE OF ENGINEERING, BANGALORE-19
+
+
+
+                                         1
+(Autonomous College under VTU Belagavi)
+DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING
+Course Outcomes (COs):
+CO-PO-PSO mapping:
+Assessment Plan for CIE:
+Laboratory Plan:
+Instructions to Students:
+1.
+2.
+3.
+Students should write the program then start with the program execution for that
+week to
+be executed in the lab at the beginning of each lab and get it corrected by the
+batch-in-charge
+faculty.
+Soft copy (PDF file) of all the programs along with the output needs to be submitted
+before
+the lab test.
+Continuous Internal Evaluation for each lab is for 10 marks which includes execution
+of the
+program in the allotted lab time and showing the output. Observation book needs to
+be
+corrected on the same day itself.
+4. One Lab Test will be conducted (Mostly after theory Test-2) for all the 10
+programs. Lab Test
+will comprise programs which are completely different from the existing lab list of
+programs.
+5. Marks split up for Lab:
+Continuous Internal Evaluation: 100 marks → reduced to 10 marks
+170
+BMS COLLEGE OF ENGINEERING, BANGALORE-19
+(Autonomous College under VTU Belagavi)
+DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING
+Lab Test: 60 marks → reduced to 15 marks (Writeup- 20 marks, Execution- 30 marks,
+Viva- 10
+marks)
+Lab Programs:
+171
+BMS COLLEGE OF ENGINEERING, BANGALORE-19
+(Autonomous College under VTU Belagavi)
+DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING
+
+
+                                         2
+SEE Exam Question paper format:
+172
+
+
+
+
+                                  3
+

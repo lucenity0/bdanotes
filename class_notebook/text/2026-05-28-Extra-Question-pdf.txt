@@ -1,0 +1,83 @@
+Extra Question.pdf
+
+Exported: May 28, 2026
+
+
+
+
+Summary
+This document provides a series of practical exercises designed to master NoSQL
+database management using Apache Cassandra. Through various scenarios like
+student   databases    and   e-commerce        systems,   it   guides   learners   through
+fundamental CRUD operations and the structural organization of data using
+keyspaces and tables. The curriculum specifically highlights advanced features such
+as efficient batch processing, the manipulation of collection data types, and
+the implementation of temporary data storage through Time To Live (TTL)
+settings. Ultimately, these tasks serve as a structured roadmap for understanding
+how to dynamically alter schemas and manage real-world data lifecycles in a
+distributed environment.
+
+Keywords: Cassandra database operations, CRUD operations, Collection data
+types, Time To Live, Table schema manipulation
+
+
+
+Content
+Practice Question 1: Student Database
+Perform the following operations using Cassandra:
+a) Create a keyspace named College
+b) Create a table Student_Info with attributes:
+USN (Primary Key), Name, Branch, Semester, CGPA
+c) Insert at least 3 student records
+d) Update the CGPA of a student with a given USN
+e) Display all student records
+Focus: Basic CRUD operations
+Practice Question 2: Book Management System
+Perform the following operations using Cassandra:
+a) Create a keyspace named Library
+b) Create a table Book_Info with attributes:
+Book_Id (Primary Key), Title, Author, Price, Category
+
+
+
+                                          1
+c) Insert multiple records using BATCH
+d) Update the price of a specific book
+e) Delete a book record using Book_Id
+Focus: BATCH, UPDATE, DELETE
+Practice Question 3: Customer Orders
+Perform the following operations using Cassandra:
+a) Create a keyspace named Ecommerce
+b) Create a table Customer_Orders with attributes:
+Order_Id (Primary Key), Customer_Name, Product_Name, Quantity,
+Order_Date
+c) Insert at least 3 order records
+d) Add a new column Delivery_Status using ALTER
+e) Update the delivery status for a given order
+Focus: ALTER TABLE + UPDATE
+Practice Question 4: Employee Skills (Collection Data
+Type)
+Perform the following operations using Cassandra:
+a) Create a keyspace named Company
+b) Create a table Employee_Skills with attributes:
+Emp_Id (Primary Key), Emp_Name, Skills (SET)
+c) Insert employee records with multiple skills
+d) Add a new skill to an existing employee
+e) Display employee names along with skills
+Focus: SET collection data type
+Practice Question 5: Product Expiry using TTL
+Perform the following operations using Cassandra:
+a) Create a keyspace named Store
+b) Create a table Product_Info with attributes:
+Product_Id (Primary Key), Product_Name, Price, Category
+c) Insert a product record with TTL of 20 seconds
+d) Display the product immediately
+e) Display the product after 20 seconds and observe the result
+☑
+Focus: TTL (Time To Live)
+
+
+
+
+                                           2
+

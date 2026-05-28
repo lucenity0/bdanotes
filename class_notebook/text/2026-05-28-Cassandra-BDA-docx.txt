@@ -1,0 +1,89 @@
+Cassandra_BDA.docx
+
+Exported: May 28, 2026
+
+
+
+
+Summary
+This technical guide provides a practical overview of managing data within
+Cassandra, a distributed NoSQL database, by utilizing the CQL shell interface. It
+outlines the foundational hierarchy of the system, starting with the creation of a
+Keyspace—a container for data—and moving into the definition of Tables with
+specific primary keys. The text details essential CRUD operations for manipulating
+records, while highlighting specialized features like Secondary Indexes for non-
+primary key queries and Collection types for storing sets and lists. Finally, it covers
+advanced utility functions such as Counters, Time To Live (TTL) for temporary
+data, and methods for importing or exporting datasets via CSV files.
+
+Keywords: Apache Cassandra Commands, Keyspace and Tables, CRUD Operations,
+Data Collections, Import and Export
+
+
+
+Content
+Working with CassandraNote: type cqlsh in Ubuntu terminal to start cassandraCreate
+KeySpace          :CREATE       KEYSPACE         Students         WITH        REPLICATION            =
+{‘class’:‘SimpleStrategy’,‘replication_factor’:1};Describe                   the               existing
+Keyspaces:DESCRIBE KEYSPACES;For More details on existing keyspaces:SELECT *
+FROM system.schema_keyspaces;use the keyspace “Students”:USE Students;To
+create table (column family) by name Student_Info:CREATE TABLE Students_Info
+(Roll_No    int     PRIMARY      KEY,   StudName         text,      DateOfJoining         timestamp,
+last_exam_Percent       double);Lookup     the       names   of    all   tables    in    the   current
+keyspacesDESCRIBE           TABLES;Describe      the    table     informationDESCRIBE           TABLE
+<Table_Name>;CRUDInsert :BEGIN BATCH INSERT INTO Students_Info(Roll_No,
+StudName,         DateOfJoining,    last_exam_Percent)VALUES              (1,‘Asha’,‘2012-03-12’,
+79.9)INSERT         INTO       Students_Info(Roll_No,             StudName,             DateOfJoining,
+last_exam_Percent)VALUES                (1,‘Krian’,‘2012-03-12’,89.9)INSERT                       INTO
+Students_Info(Roll_No,        StudName,       DateOfJoining,         last_exam_Percent)VALUES
+(1,‘Tarun’,‘2012-03-12’,78.9)INSERT         INTO        Students_Info(Roll_No,             StudName,
+
+
+
+                                                 1
+DateOfJoining,      last_exam_Percent)VALUES            (1,‘Samrth’,‘2012-03-12’,90.9)INSERT
+INTO Students_Info(Roll_No, StudName, DateOfJoining, last_exam_Percent)VALUES
+(1,‘Smitha’,‘2012-03-12’,67.9)INSERT          INTO       Students_Info(Roll_No,     StudName,
+DateOfJoining,       last_exam_Percent)VALUES              (1,‘Rohan’,‘2012-03-12’,56.9)APPLY
+BATCH;View data from the table “Students_Info”SELECT * FROM Students_Info;View
+data from the table “Students_Info” where RoolNo column either has a value 1 or 2
+or 3SELECT * FROM Students_Info WHERE Roll_No IN (1,2,3);To execute a non
+primary key - will throw an errorselect * from students_info where Studname=
+‘Asha’;So create an INDEX on the Column as below:To create an INDEX on StudName
+Column of the Students_Info column familyCREATE INDEX ON Students_Info
+( StudName);Now execute the query based on the INDEXED Column:select * from
+students_info where Studname= ‘Asha’;To specify the number of rows retured in the
+outputselect Roll_No, StudName from students_info LIMIT 2;Alias for Column:Select
+Roll_No      as   “USN”      from   Students_info;UPDATEUPDATE            students_info      SET
+StudName=‘David Sheen’ WHERE RollNo=2;Lets try to update the primary
+keyUPDATE         students_info     SET     rollno=6       WHERE       rollno=3;DELETEDELETE
+LastExamPercent FROM students_info WHERE RollNo=2;Delete a RowDELETE FROM
+student_info WHERE RollNo=2;Set CollectionA column of type set consists of
+unordered unique values. However, when the column is queried, it returns, it returns
+the values in sorted order. For example, for text values, it sorts in alphabetical
+order.ALTER TABLE students_info ADD hobbies set<text>List CollectionWhen the
+order of elements matter, one should go for a list collection.ALTER TABLE
+students_info        ADD      language        list<text>;UPDATE          students_info       SET
+hobbies=hobbies+{‘Chess,Table             Tennis’}     WHERE      RollNo=1;SELECt      *    from
+students_info WHERE RollNo=1;UPDATE students_info SET langusge=language+
+[‘Hindi,English’] WHERE RollNo=1;Note: You can remove an element from a set using
+the subtraction(-) operator.USING A COUNTERA counter is a special column that is
+changed in increments. For example, we may need a counter column to count the
+number of times a particular book is issued from the library bythe student.CREATE
+TABLE library_book(counter_value counter, book_name varchar, stud_name varchar,
+PRIMARY KEY(book_name,stud_name));Load data into the counter columnUPDATE
+library_book SET counetr value=couner_vale+1 WHERE book_name=‘Big data
+Analytics’ AND stud_name=‘jeet’;TIME TO LIVECREATE TABLE userlogin(userid int
+PRIMARY KEY, password text);INSERT INTO userlogin(userid, password) VALUES
+(1,‘infy’)   USING     TTL    30;SELECT       TTL(password)       FROM     userlogin       WHERE
+userid=1;IMPORT and EXPORTExport to CSVCOPY elearninglists(id,course_order,
+course_id,courseowner,title)          TO             ‘d:.csv’;Import      from         CSVCOPY
+elearninglists(id,course_order,     course_id,courseowner,title)        FROM     ‘d:.csv’;Import
+FROM STDINCOPY persons(id,fname,lnmae)FROM STDIN;Export to STDOUTCOPY
+elearninglists(id,course_order, course_id,courseowner,title) TO STDOUT;
+
+
+
+
+                                                2
+

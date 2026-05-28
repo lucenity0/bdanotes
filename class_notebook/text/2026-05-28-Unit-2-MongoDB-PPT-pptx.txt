@@ -1,0 +1,365 @@
+Unit-2 MongoDB PPT.pptx
+
+Exported: May 28, 2026
+
+
+
+
+Summary
+This educational material serves as an introductory guide to MongoDB, a prominent
+NoSQL database designed for managing big data and real-time web applications.
+The text contrasts traditional relational databases with MongoDB’s document-
+oriented architecture, highlighting its use of BSON and a flexible schema that
+allows for horizontal scaling through sharding and replication. A significant
+portion of the content explores the CAP Theorem, explaining the necessary trade-
+offs between consistency, availability, and partition tolerance in distributed
+systems. Finally, the source provides practical instruction on performing CRUD
+operations, managing collections, and utilizing specialized features like GridFS for
+binary storage.
+
+Keywords: MongoDB Introduction, NoSQL Database Types, CAP Theorem, CRUD
+Operations, Sharding and Replication
+
+
+
+Content
+Big DataAnd AnalyticsBig Data and Analytics by Seema Acharya and Subhashini
+ChellappanCopyright   2015,   WILEY     INDIA   PVT.    LTD.Seema      AcharyaSubhashini
+ChellappanChapter 6Big Data and Analytics by Seema Acharya and Subhashini
+ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Introduction to MongoDBLearning
+Objectives and Learning OutcomesBig Data and Analytics by Seema Acharya and
+Subhashini   ChellappanCopyright       2015,    WILEY      INDIA      PVT.   LTD.Learning
+ObjectivesLearning OutcomesIntroduction to MongoDBTo study the features of
+MongoDB.To learn how to perform CRUD operations.To study aggregation.To study
+the MapReduce Framework.To import from and export to CSV format.To comprehend
+the reasons behind the popularity of NoSQL database.To be able to perform
+CRUDoperations.To     comprehend       MapReduce       framework.To     understand   the
+aggregation.To be able to successfully import from and export to CSV.Session
+PlanBig Data and Analytics by Seema Acharya and Subhashini ChellappanCopyright
+2015, WILEY INDIA PVT. LTD.Lecture time90 to 120 minutesQ/A15 minutesAgendaBig
+
+
+
+                                          1
+Data and Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015,
+WILEY INDIA PVT. LTD.NoSQL: Types of NoSQL databases CAP Theorem Terms used in
+RDBMS and MongoDB MongoDB Query Language: CRUD Finding documents based
+on search criteria Dealing with Null values Count, Limit, Sort Skip, Aggregate
+FunctionsMongoDB– An IntroductionBig Data and Analytics by Seema Acharya and
+Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Types of NoSQLKey
+value                               datastoreRiakRedisMembaseColumn-orienteddata
+storeCassandraHBaseHyperTableDocument
+datastoreMongoDBCouchDBRavenDBGraph                    datastoreInfiniteGraphNeo4Allegro
+GraphBig     Data   and    Analytics    by     Seema        Acharya    and     Subhashini
+ChellappanCopyright        2015,        WILEY            INDIA        PVT.       LTD.{_id:
+ObjectId(“5effaa5662679b5af2c58829”),         email:    “email@example.com”,        name:
+{given: “Jesse”, family: “Xiao”}, age: 31, addresses: [{label: “home”, street: “101
+Elm Street”, city: “Springfield”, state: “CA”, zip: “90000”, country: “US”}, {label:
+“mom”, street: “555 Main Street”, city: “Jonestown”, province: “Ontario”, country:
+“CA”}]       }Brewer’s        CAP        TheoremCAPConsistencyAvailabilityPartition
+toleranceConsistency implies that every read fetches the last write.Availability
+implies that reads and writes always succeed. In other words, each non-failing node
+will return a response in a reasonable amount of time.Partition tolerance implies that
+the system will continue to function when network partition occurs.When to choose
+consistency over availability and vice-versa1. Choose availability over consistency
+when your business requirements allow some flexibility around when the data in the
+system synchronizes.2. Choose consistency over availability when your business
+requirements demand atomic reads and writes.CAP TheoremCAP TheoremCAP
+TheoremCAP TheoremCAP TheoremCAP TheoremCAP TheoremIf the bank prioritizes
+consistency, ATM may refuse to process deposits or withdrawls until the Partition is
+resolved.This ensures that the balance remains consistent, but the system is
+unavailable to the Customer.CAP TheoremIf the Bank prioritize Availability, the ATM
+may allow withdrawals and deposits to occur, but the data Remain Inconsistent until
+the Partition Tolerance is resolved.CAP theoremWhen there is a network Partition,
+The Customer could withdraw the entire balance from both the ATMs. CAP
+theoremWhen the Network comes back online, the inconsistency is resolved and
+now the balance is negative. That is not good.What is MongoDB?Big Data and
+Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015, WILEY
+INDIA      PVT.     LTD.MongoDB        is:Cross-platform-         .Open        source.Non-
+relational.Distributed.NoSQL.Document-oriented data store.Why MongoDB?Big Data
+and Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015, WILEY
+INDIA PVT. LTD.Why MongoDB?Big Data and Analytics by Seema Acharya and
+Subhashini    ChellappanCopyright      2015,      WILEY       INDIA     PVT.     LTD.Open
+SourceDistributed- storing data across multiple servers or computers instead of just
+oneFast In-Place Updates- A method of modifying data within a database or data
+
+
+                                          2
+structure where only the specific parts that need changing are altered directly,
+without needing to read the entire data set or create a temporary copyReplication-
+the process of copying data from a primary server to multiple secondary serversFull
+Index Support -MongoDB supports many types of indexes, including single-field,
+compound, multikey, geospatial, text search, hashed, and wildcard indexes. These
+indexes help MongoDB execute queries efficiently. Rich Query Language - a query
+language that supports a wide range of queries and can search and retrieve data
+based on specific conditions. Easy Scalability- Easy scalability primarily through its
+built-in support for “horizontal scaling” using a feature called “sharding,” which
+allows you to distribute data across multiple servers by splitting it into smaller
+chunks,Auto sharding- MongoDB automatically distributes data across multiple
+shards, allowing the database system to handle large datasets and high user
+demandsJSONBig      Data   and    Analytics       by   Seema   Acharya   and   Subhashini
+ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Using JSONJSON, or JavaScript
+Object Notation, is a human-readable data interchange format.JSON objects are
+associative containers, wherein a string key is mapped to a value (which can be a
+number, string, boolean, array, an empty value — null, or even another
+object).BSON, or Binary JSON, is the data format that MongoDB uses to organize and
+store data.Creating or Generating a Unique KeyEach JSON document should have a
+unique identifier.It is similar to the primary key of relational databases.This
+facilitates search for documents based on the unique identifier.ObjectIds use 12
+bytes of storage, which gives them a string representation that is 24 hexadecimal
+digits: 2 digits for each byte. Support for Dynamic QueriesBig Data and Analytics by
+Seema Acharya and Subhashini ChellappanCopyright 2015, WILEY INDIA PVT.
+LTD.MongoDB has extensive support for dynamic queries.This is in keeping with
+traditional RDBMS wherein we have static data and dynamic queries.”Static data”
+refers to a fixed dataset that doesn’t change frequently”dynamic queries” are
+queries that can be constructed and executed at runtimeExample: Static data:A
+database table containing a list of all countries with their corresponding country
+codes.Dynamic query:A query that retrieves a list of customers from this table based
+on a user-selected region, where the region filter is provided dynamically when the
+user makes a selection. Storing Binary DataBig Data and Analytics by Seema
+Acharya and Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.MongoDB
+provides GridFS to support the storage of binary data. It can store up to 4 MB of
+data. This suffices for photographs or small video clips. If one wishes to store movie
+clips, it stores the metadata in a collection called “file”. It then breaks the data into
+small pieces called chunks and stores it in the chunks collection.Replication in
+MongoDBClient
+ApplicationPrimarySecondarySecondarySecondaryReplicationReplicationWritesReadsReplicationB
+Data and Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015,
+WILEY INDIA PVT. LTD.MongoDB provides data redundancy and high availability.It
+
+
+                                              3
+helps to recover from hardware failure and service interruption.Sharding in
+MongoDB(256 GB) (256 GB)Logical Database (Collection 1)Collection 11 TB
+databaseShard 1(256 GB)Shard 2Shard 3Shard 4(256 GB)Big Data and Analytics by
+Seema Acharya and Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.
+(256 GB)(256 GB)Sharding is a method for distributing or partitioning data across
+multiple machines.Horizontal scaling, also known as scale-out, refers to adding
+machines to share the data set and load. Sharding in MongoDBIn MongoDB, a
+sharded cluster consists of:ShardsMongosConfig serversA shard is a replica set that
+contains a subset of the cluster’s data.The mongos acts as a query router for client
+applications, handling both read and write operations. It dispatches client requests
+to the relevant shards and aggregates the result from shards into a consistent client
+response. Clients connect to a mongos, not to individual shards.Config servers are
+the authoritative source of sharding metadata. The sharding metadata reflects the
+state and organization of the sharded data. The metadata contains the list of
+sharded collections, routing information, etc.Advantages of ShardingIncreased read/
+write throughput.Increased storage capacity.Data Locality.Terms Used in RDBMS and
+MongoDBBig      Data   and     Analytics    by     Seema     Acharya     and   Subhashini
+ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Terms Used in RDBMS and
+MongoDBBig      Data   and     Analytics    by     Seema     Acharya     and   Subhashini
+ChellappanCopyright             2015,               WILEY              INDIA         PVT.
+LTD.RDBMSMongoDBDatabaseDatabaseTableCollectionRecordDocumentColumnsFields /
+Key Value pairsIndexIndexJoinsEmbedded documentsPrimary KeyPrimary key (_id is
+a identifier)Data Types in MongoDBBig Data and Analytics by Seema Acharya and
+Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Data Types in
+MongoDBBig      Data   and     Analytics    by     Seema     Acharya     and   Subhashini
+ChellappanCopyright 2015, WILEY INDIA PVT. LTD.StringMust be UTF-8 valid.Most
+commonly used data type.IntegerCan be 32-bit or 64-bit (depends on the
+server).BooleanTo store a true/false value.DoubleTo store floating point (real
+values).Min/Max keysTo compare a value against the lowest or highestBSON
+elements.ArraysTo store arrays or list or multiple values into onekey.TimestampTo
+record when a document has been modified oradded.NullTo store a NULL value. A
+NULL is a missing orunknown value.DateTo store the current date or time in Unix
+timeformat. One can create object of date and pass day, month and year to it.Object
+IDTo store the document’s id.Binary dataTo store binary data (images, binaries,
+etc.).CodeTo store javascript code into the document.Regular expressionTo store
+regular expression.CRUD in MongoDBBig Data and Analytics by Seema Acharya and
+Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.CollectionsBig Data
+and Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015, WILEY
+INDIA PVT. LTD.To create a collection by the name “Person”. Let us take a look at
+thecollection   list   prior    to    the       creation    of   the     new    collection
+“Person”.db.createCollection(“Person”);CollectionsBig Data and Analytics by Seema
+
+
+                                            4
+Acharya and Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.To drop a
+collection          by        the     name          “student”.db.student.drop();To                    drop       a
+databasedb.dropDatabase()Update                   MethodBig          Data   and       Analytics      by    Seema
+Acharya and Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Insert the
+document for “Aryan David” into the Students collection only if it does not already
+exist in the collection. However, if it is already present in the collection, then update
+the document with new values. (Update his Hobbies from “Skating” to “Chess”.) Use
+“Update else insert” (if there is an existing document, it will attempt to update it, if
+there is no existing document then it will insert it).db.Students.update({_id:3,
+StudName:“Aryan               David”,        Grade:           “VII”},{$set:{Hobbies:                "Skating"}},
+{upsert:true});Find           MethodBig     Data        and    Analytics      by      Seema       Acharya     and
+Subhashini         ChellappanCopyright           2015,       WILEY    INDIA    PVT.     LTD.To       search    for
+documents          from       the    “Students”          collection     based         on     certain       search
+criteria.db.Students.find({StudName:"Aryan                     David"});Find       MethodBig         Data     and
+Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015, WILEY
+INDIA PVT. LTD.To display only the StudName and Grade from all the documents of
+the Students collection. The identifier _id should be suppressed and NOT
+displayed.db.Students.find({},{StudName:1,Grade:1,_id:0});To                                 display          the
+StudName, Grade as well the identifier, _id from the document of the Students
+collection where the _id column is 1.db.Students.find({_id:1},{StudName:1,Grade:
+1});To display the StudName, Grade from the document of the Students collection
+where        the      _id      column       is     1.        The      _id     field        should      not     be
+displayed.db.Students.find({_id:1},{StudName:1,Grade:1,_id:0});Find                                  MethodBig
+Data and Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015,
+WILEY INDIA PVT. LTD.To find those documents where the Grade is set to
+‘VII’db.Students.find({Grade:{$eq:‘VII’}}).pretty();To find those documents where
+the Grade is not set to ‘VII’db.Students.find({Grade:{$ne:’VII’}}).pretty();Find
+MethodBig          Data       and    Analytics       by        Seema        Acharya         and      Subhashini
+ChellappanCopyright 2015, WILEY INDIA PVT. LTD.To find those documents from the
+Students collection where the Hobbies is set to either ‘Chess’ or is set to
+‘Skating’.db.Students.find ({Hobbies :{ $in: [‘Chess’,‘Skating’]}}).pretty ();To find
+those documents from the Students collection where the Hobbies is set neither to
+‘Chess’      nor         is   set    to    ‘Skating’.db.Students.find              ({Hobbies          :{     $nin:
+['Chess','Skating']}}).pretty ();Find MethodTo find those documents from the
+Students collection where the Hobbies is set to ‘Graffiti’ and the StudName is set to
+‘Hersch       Gibbs’          (AND        condition)db.Students.find               ({Hobbies           :’Graffiti’,
+StudName:’Hersch Gibbs’}).pretty();Find MethodBig Data and Analytics by Seema
+Acharya and Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.To find
+documents from the Students collection where the StudName begins with
+“M”.db.Students.find({StudName:/^M/}).pretty();ORdb.Students.find({StudName:
+{$regex:”^M”}}).pretty();To find documents from the Students collection where the
+
+
+                                                         5
+StudNameEnds in “s”.db.Students.find({StudName:/s$/}).pretty();Find MethodBig
+Data and Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015,
+WILEY INDIA PVT. LTD.To find documents from the Students collection where the
+StudName has an “e”in any position.db.Students.find({StudName:/e/}).pretty();OR
+db.Students.find({StudName:/.*e.*/}).pretty();ORdb.Students.find({StudName:
+{$regex:”e”}}).pretty();Find methodTo find those documents from the Students
+collection      where    the     StudName            ends      in     “a”.db.Students.find({StudName:
+{regex:”a”}}).pretty();Dealing with NULL valuesTo add a new field with null value in
+existing documents(_id:3 and _id:4) of Students collection. A NULL is a missing or
+unknown value. When we place NULL as a value for a specified field , it implies that
+currently we do not know the value or the value is missing. We can always update
+the value of the field once we know it.Before we execute the commands to update
+documents with a null value in a column, let us first view the two documents.
+db.Students.find({$or:[{_id:3},{_id:4}]});Update the documents with NULL values in
+the                  “Location”                        column.db.Students.update({_id:3},{$set:
+{Location:null}});db.Students.update({_id:4},{$set:{Location:null}});Dealing                                    with
+NULL         valuesTo         search         for      NULL            values             in      the       Location
+column.db.Students.find({Location:{$eq:null}});To remove “Location” field having
+“NULL”   values      from      the     documents       (_id:3        and        _id:4)    from     the    Students
+collection.db.Students.update({_id:3},{$unset:
+{Location:null}});db.Students.update({_id:4},{$unset:{Location:null}});Count
+methodBig        Data     and        Analytics       by        Seema            Acharya       and        Subhashini
+ChellappanCopyright 2015, WILEY INDIA PVT. LTD.To find the number of documents
+in the Students collection.db.Students.count();To find the number of documents in
+the          Students            collection               wherein                  the            Grade            is
+VII .db.Students.count({Grade:”VII”});Sort MethodBig Data and Analytics by Seema
+Acharya and Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.To sort
+the    documents        from    the     Students      collection           in    the      ascending       order    of
+StudName.db.Students.find().sort({StudName:1}).pretty();To sort the documents
+from       the      Students           collection         in        the          descending            order       of
+StudName.db.Students.find().sort({StudName:-1}).pretty();db.Students.find().sort({Grade:
+1,Hobbies:-1}).pretty();To sort the documents from the Students collection first on
+Grade      in     ascending          order     and        then        on         Hobbies      in       descending
+order.db.Students.find().sort({Grade:1,Hobbies:1}).pretty();To sort the documents
+from the Students collection first on Grade in ascending order and then on Hobbies
+in ascending order.Skip MethodTo skip the first 2 documents from the Students
+collection.db.Students.find().skip(2).pretty();To                   sort     the       documents         from     the
+Students         collection      and          skip     the           first        document             from       the
+output.db.Students.find().skip(1).pretty().sort({StudName:1});To display the last 2
+documents                              from                                the                            Students
+collection.db.Students.find().pretty().skip(db.Students.count()-2);To                              retrieve       the
+
+
+                                                      6
+third,fourth           and          fifth        document               from          the           Students
+collection.db.Students.find().pretty().skip(2).limit(3);Adding                  new    field    –    update
+methodBig        Data        and    Analytics      by        Seema        Acharya     and       Subhashini
+ChellappanCopyright 2015, WILEY INDIA PVT. LTD.To add a new field to an existing
+document in MongoDB, you can use the updateOne() or updateMany() method along
+with the $set operator.db.collection.updateOne( // Filter to select the document(s)
+you want to update { <filter> }, // Update operation { // $set operator to add a new
+field   $set:     {     newField:        “value”    //       Specify      the   new     field       and   its
+value } });db.users.updateOne( { name: “John” }, // Filter documents where name is
+“John” { $set: { age: 30 } } // Add the new field “age” with value 30);Removing an
+existing   fieldBig      Data      and      Analytics       by    Seema    Acharya     and      Subhashini
+ChellappanCopyright 2015, WILEY INDIA PVT. LTD.To remove an existing field from
+an existing document in MongoDB, you can use the updateOne() or updateMany()
+method along with the $unset operator.db.collection.updateOne( // Filter to select
+the document(s) you want to update { <filter> }, // Update operation { // $unset
+operator to remove a field $unset: { fieldName: “” // Specify the name of the field
+you want to remove } });db.users.updateOne( { name: “John” }, // Filter documents
+where name is “John” { $unset: { age: "" } } // Remove the "age" field);Save
+MethodBig        Data      and      Analytics      by        Seema        Acharya     and       Subhashini
+ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Save() method will insert a new
+document if the document with the specified _id does not exist. However, if a
+document with specified id exists, it replaces the existing document with the new
+one.// Update an existing document with _id "123abc"db.collection.save({ _id:
+"123abc", name: "Updated Name", age: 30, status: "active"});// Insert a new
+document if _id "456def" doesn't already existdb.collection.save({ _id: "456def",
+name: "New Document", age: 25, status: "inactive"});Remove MethodBig Data and
+Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015, WILEY
+INDIA PVT. LTD.Remove() method is used to delete documents from a collection that
+match a specified query. It can remove either a single document or multiple
+documents depending on the criteria provided.db.collection.remove( &lt;query&gt;,
+{                     justOne:                     &lt;boolean&gt;,                         writeConcern:
+&lt;document&gt; })db.users.remove({ name: "John" });db.users.remove({ name:
+"John" }, { justOne: true });Aggregate FunctionBig Data and Analytics by Seema
+Acharya and Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Aggregate
+Function{_id: “C123”,TotAccBal: 1400}{_id: “C111”,TotAccBal: 1200}Big Data and
+Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015, WILEY
+INDIA PVT. LTD.Customers{}CustID: “C123”,AccBal: 500, AccType: “S”{}CustID:
+“C123”,AccBal: 900, AccType: “S”{CustID: “C111”,$matchAccBal: 1200,AccType:
+“S”}{}CustID: “C123”,AccBal: 1500, AccType: “C”{}CustID: “C123”,AccBal: 500,
+AccType:        “S”{CustID:        “C123”,AccBal:                900,AccType:    “S”$group}{}CustID:
+“C111”,AccBal: 1200, AccType: “S”Aggregate FunctionBig Data and Analytics by
+
+
+                                                        7
+Seema Acharya and Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.To
+group   on    “CustID”   and   compute    the   sum   of   “AccBal”,   use    the   below
+syntax:db.Customers.aggregate({$group:{_id:                      “$CustID”,”TotAccBal:
+{$sum:”$AccBal”}}});First filter on “AccType:S” and then group it on “CustID” and
+then compute the sum of “AccBal” and then filter those documents wherein the
+“TotAccBal”       is      greater        than     1200,       use       the         below
+syntax:db.Customers.aggregate( { $match : {AccType : “S” } },{ $group : { _id :
+"$CustID”,TotAccBal : { $sum : "$AccBal” } } },{ $match : {TotAccBal : { $gt :
+1200 } }});Aggregate FunctionBig Data and Analytics by Seema Acharya and
+Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.To group on “CustID”
+and compute the average of the “AccBal” for each group:db.Customers.aggregate({
+$group : { _id : "$CustID”,TotAccBal : { $avg : "$AccBal” } } });To group on “CustID”
+and determine the maximum “AccBal” for each group:db.Customers.aggregate({
+$group : { _id : "$CustID”,TotAccBal : { $max : "$AccBal” } } });To group on “CustID”
+and determine the minimum “AccBal” for each group:db.Customers.aggregate({
+$group : { _id : "$CustID”,TotAccBal : { $min : "$AccBal” } } });MongoImportBig
+Data and Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015,
+WILEY INDIA PVT. LTD.Import data from a CSV fileBig Data and Analytics by Seema
+Acharya and Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Given a
+CSV file “sample.txt” in the D: drive, import the file into the MongoDBcollection,
+“SampleJSON”. The collection is in the database “test”.Mongoimport –db test –
+collection SampleJSON –type=csv –headerline –file d:.txt–headerline instructs
+mongoimport to determine the name of the fields using the first line in the CSV file(If
+using –type csv or –type tsv)–fieldFile =<filename> option allows you to specify a
+file that holds a list of field names if your CSV or TSV file does not include field
+names in the first line of the file.–file=<filename> specifies the location and name
+of a file containing the data to import. If you do not specify a file, mongoimport
+reads data from standard input.MongoExportBig Data and Analytics by Seema
+Acharya and Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Export
+data to a CSV fileBig Data and Analytics by Seema Acharya and Subhashini
+ChellappanCopyright 2015, WILEY INDIA PVT. LTD.This command used at the
+command prompt exports MongoDB JSON documents from “Customers” collection in
+the “test” database into a CSV file “Output.txt” in the D: drive.–db test –collection
+Customers –csv –fieldFiled:.txt –outMongoexportd:.txtAnswer a few quick questions
+…Big Data and Analytics by Seema Acharya and Subhashini ChellappanCopyright
+2015, WILEY INDIA PVT. LTD.CrosswordBig Data and Analytics by Seema Acharya and
+Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Answer MeBig Data
+and Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015, WILEY
+INDIA PVT. LTD. What is MongoDB? Comment on Auto-sharding in MongoDB. What
+are collections and documents? What is JSON? Explain your understanding of
+Update In-Place.Summary please…Big Data and Analytics by Seema Acharya and
+
+
+                                            8
+Subhashini ChellappanCopyright 2015, WILEY INDIA PVT. LTD.Ask a few participants
+of the learning program to summarize the lecture.References …Big Data and
+Analytics by Seema Acharya and Subhashini ChellappanCopyright 2015, WILEY
+INDIA PVT. LTD.Further ReadingsBig Data and Analytics by Seema Acharya and
+Subhashini   ChellappanCopyright    2015,    WILEY    INDIA    PVT.   LTD.http://
+www.mongodb.org/ https://university.mongodb.com/ http://www.tutorialspoint.com/
+mongodb/Thank youBig Data and Analytics by Seema Acharya and Subhashini
+ChellappanCopyright 2015, WILEY INDIA PVT. LTD.
+
+
+
+
+                                       9
+
