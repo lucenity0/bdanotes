@@ -3128,66 +3128,6 @@ REDUCER OUTPUT:
    ApplicationMaster ──finish──▶ ResourceManager
     </div>
 
-    <div class="section-h"><h3><span class="icon">📦</span> How YARN Allocates Jobs - WordCount Example</h3></div>
-    <div class="callout callout-orange"><strong>Exam-friendly summary:</strong> the client submits a WordCount job, HDFS splits the input into blocks, the ResourceManager launches an ApplicationMaster, containers are allocated across NodeManagers, and map tasks are placed where the data lives whenever possible.</div>
-
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">Key Terms</div>
-        <ul class="revision-list">
-          <li><strong>Job / Application:</strong> a program submitted by the user.</li>
-          <li><strong>Task:</strong> a job broken into work units, such as 4 map tasks + 1 reduce task.</li>
-          <li><strong>Container:</strong> CPU + memory resource where a task runs.</li>
-          <li><strong>ApplicationMaster:</strong> asks for containers and coordinates execution.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">Example Cluster</div>
-        <div class="tbl-wrap">
-          <table class="vs-table">
-            <thead><tr><th>Node</th><th>Role</th><th>Resources</th><th>Containers</th></tr></thead>
-            <tbody>
-              <tr><td>Node1</td><td>Node Manager</td><td>4 GB RAM</td><td>2</td></tr>
-              <tr><td>Node2</td><td>Node Manager</td><td>4 GB RAM</td><td>2</td></tr>
-              <tr><td>Node3</td><td>Node Manager</td><td>4 GB RAM</td><td>2</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p style="margin-top:8px;color:var(--text3);font-size:13px;">Total containers in cluster = 6</p>
-      </div>
-    </div>
-
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">Step Flow</div>
-        <ol class="revision-list">
-          <li>User submits the WordCount job.</li>
-          <li>HDFS splits the input file into 4 blocks.</li>
-          <li>ResourceManager starts the ApplicationMaster in a container.</li>
-          <li>ApplicationMaster requests 5 containers: 4 for map tasks and 1 for reduce.</li>
-          <li>ResourceManager allocates containers across NodeManagers.</li>
-          <li>NodeManagers run the tasks and report progress back.</li>
-          <li>Map tasks finish first, then shuffle/sort happens, then the reduce task runs.</li>
-          <li>Final output is written back to HDFS.</li>
-        </ol>
-      </div>
-      <div class="card">
-        <div class="card-title">Who Does What</div>
-        <div class="tbl-wrap">
-          <table class="vs-table">
-            <thead><tr><th>Component</th><th>Responsibility</th></tr></thead>
-            <tbody>
-              <tr><td>Client</td><td>Submits the job (application)</td></tr>
-              <tr><td>ResourceManager</td><td>Allocates containers to applications</td></tr>
-              <tr><td>ApplicationMaster</td><td>Requests containers and monitors job progress</td></tr>
-              <tr><td>NodeManager</td><td>Starts and stops containers, runs tasks</td></tr>
-              <tr><td>Container</td><td>Executes a single task</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
     <div class="callout callout-yellow"><strong>Data Locality:</strong> YARN tries to schedule tasks on nodes where data blocks reside. This reduces network traffic: Map tasks run on the same node that stores the HDFS block they process.</div>
 
     <div class="revision-box">
