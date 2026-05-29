@@ -151,6 +151,18 @@ body {
   font-size: 12px;
 }
 .nav-item.special { color: #f5e642; }
+.nav-archive {
+  padding-left: 20px;
+  margin: 4px 0 8px;
+}
+.nav-archive-summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: #9a9a9a;
+  padding: 6px 0;
+}
+.nav-archive-summary::-webkit-details-marker { display: none; }
 
 /* ── MAIN ── */
 #main {
@@ -822,49 +834,64 @@ pre.source-text {
     
     <div class="nav-section-label">Unit 1 · Big Data Basics</div>
     <a class="nav-item" onclick="showPage('u1')">📦 Unit 1 Overview</a>
-    <a class="nav-item sub" onclick="showPage('u1-types')">Types of Digital Data</a>
-    <a class="nav-item sub" onclick="showPage('u1-bigdata')">What is Big Data?</a>
-    <a class="nav-item sub" onclick="showPage('u1-5v')">Characteristics (5 Vs)</a>
-    <a class="nav-item sub" onclick="showPage('u1-analytics')">Types of Analytics</a>
-    <a class="nav-item sub" onclick="showPage('u1-stack')">Big Data Stack</a>
-    <a class="nav-item sub" onclick="showPage('u1-casestudy')">Case Study: Weather</a>
+    <details class="nav-archive">
+      <summary class="nav-archive-summary">Archive (old notes)</summary>
+      <a class="nav-item sub" onclick="showPage('u1-types')">Types of Digital Data</a>
+      <a class="nav-item sub" onclick="showPage('u1-bigdata')">What is Big Data?</a>
+      <a class="nav-item sub" onclick="showPage('u1-5v')">Characteristics (5 Vs)</a>
+      <a class="nav-item sub" onclick="showPage('u1-analytics')">Types of Analytics</a>
+      <a class="nav-item sub" onclick="showPage('u1-stack')">Big Data Stack</a>
+      <a class="nav-item sub" onclick="showPage('u1-casestudy')">Case Study: Weather</a>
+    </details>
 
     <div class="nav-section-label">Unit 2 · NoSQL & MongoDB</div>
     <a class="nav-item" onclick="showPage('u2')">📋 Unit 2 Overview</a>
-    <a class="nav-item sub" onclick="showPage('u2-cap')">CAP Theorem</a>
-    <a class="nav-item sub" onclick="showPage('u2-nosql')">NoSQL Types</a>
-    <a class="nav-item sub" onclick="showPage('u2-mongo-basics')">MongoDB Basics</a>
-    <a class="nav-item sub" onclick="showPage('u2-crud')">MongoDB CRUD</a>
-    <a class="nav-item sub" onclick="showPage('u2-query')">Query Operators</a>
-    <a class="nav-item sub" onclick="showPage('u2-aggregate')">Aggregation</a>
+    <details class="nav-archive">
+      <summary class="nav-archive-summary">Archive (old notes)</summary>
+      <a class="nav-item sub" onclick="showPage('u2-cap')">CAP Theorem</a>
+      <a class="nav-item sub" onclick="showPage('u2-nosql')">NoSQL Types</a>
+      <a class="nav-item sub" onclick="showPage('u2-mongo-basics')">MongoDB Basics</a>
+      <a class="nav-item sub" onclick="showPage('u2-crud')">MongoDB CRUD</a>
+      <a class="nav-item sub" onclick="showPage('u2-query')">Query Operators</a>
+      <a class="nav-item sub" onclick="showPage('u2-aggregate')">Aggregation</a>
+    </details>
 
     <div class="nav-section-label">Unit 3 · Cassandra</div>
     <a class="nav-item" onclick="showPage('u3')">🗃️ Unit 3 Overview</a>
-    <a class="nav-item sub" onclick="showPage('u3-features')">Cassandra Features</a>
-    <a class="nav-item sub" onclick="showPage('u3-arch')">Architecture & Keyspaces</a>
-    <a class="nav-item sub" onclick="showPage('u3-cql')">CQL CRUD</a>
-    <a class="nav-item sub" onclick="showPage('u3-collections')">Collections & TTL</a>
-    <a class="nav-item sub" onclick="showPage('u3-counters')">Counters & Import/Export</a>
-    <a class="nav-item sub" onclick="showPage('u3-hadoop-intro')">Hadoop Intro & RDBMS vs Hadoop</a>
+    <details class="nav-archive">
+      <summary class="nav-archive-summary">Archive (old notes)</summary>
+      <a class="nav-item sub" onclick="showPage('u3-features')">Cassandra Features</a>
+      <a class="nav-item sub" onclick="showPage('u3-arch')">Architecture & Keyspaces</a>
+      <a class="nav-item sub" onclick="showPage('u3-cql')">CQL CRUD</a>
+      <a class="nav-item sub" onclick="showPage('u3-collections')">Collections & TTL</a>
+      <a class="nav-item sub" onclick="showPage('u3-counters')">Counters & Import/Export</a>
+      <a class="nav-item sub" onclick="showPage('u3-hadoop-intro')">Hadoop Intro & RDBMS vs Hadoop</a>
+    </details>
 
     <div class="nav-section-label">Unit 4 · Hadoop</div>
     <a class="nav-item" onclick="showPage('u4')">🐘 Unit 4 Overview</a>
-    <a class="nav-item sub" onclick="showPage('u4-hdfs')">HDFS Architecture</a>
-    <a class="nav-item sub" onclick="showPage('u4-hdfs-ops')">HDFS Read/Write & Commands</a>
-    <a class="nav-item sub" onclick="showPage('u4-mapreduce')">MapReduce</a>
-    <a class="nav-item sub" onclick="showPage('u4-wordcount')">WordCount Program</a>
-    <a class="nav-item sub" onclick="showPage('u4-yarn')">YARN Architecture</a>
-    <a class="nav-item sub" onclick="showPage('u4-scheduler')">Schedulers</a>
+    <details class="nav-archive">
+      <summary class="nav-archive-summary">Archive (old notes)</summary>
+      <a class="nav-item sub" onclick="showPage('u4-hdfs')">HDFS Architecture</a>
+      <a class="nav-item sub" onclick="showPage('u4-hdfs-ops')">HDFS Read/Write & Commands</a>
+      <a class="nav-item sub" onclick="showPage('u4-mapreduce')">MapReduce</a>
+      <a class="nav-item sub" onclick="showPage('u4-wordcount')">WordCount Program</a>
+      <a class="nav-item sub" onclick="showPage('u4-yarn')">YARN Architecture</a>
+      <a class="nav-item sub" onclick="showPage('u4-scheduler')">Schedulers</a>
+    </details>
 
     <div class="nav-section-label">Unit 5 · Scala & Spark</div>
     <a class="nav-item" onclick="showPage('u5')">⚡ Unit 5 Overview</a>
     <a class="nav-item special" href="unit5.html">📘 Unit 5 Complete Notes</a>
-    <a class="nav-item sub" onclick="showPage('u5-scala')">Scala Basics</a>
-    <a class="nav-item sub" onclick="showPage('u5-scala-adv')">Arrays, Maps & Tuples</a>
-    <a class="nav-item sub" onclick="showPage('u5-spark')">Apache Spark Intro</a>
-    <a class="nav-item sub" onclick="showPage('u5-rdd')">RDDs</a>
-    <a class="nav-item sub" onclick="showPage('u5-transformations')">Transformations & Actions</a>
-    <a class="nav-item sub" onclick="showPage('u5-sparksql')">Spark SQL</a>
+    <details class="nav-archive">
+      <summary class="nav-archive-summary">Archive (old notes)</summary>
+      <a class="nav-item sub" onclick="showPage('u5-scala')">Scala Basics</a>
+      <a class="nav-item sub" onclick="showPage('u5-scala-adv')">Arrays, Maps & Tuples</a>
+      <a class="nav-item sub" onclick="showPage('u5-spark')">Apache Spark Intro</a>
+      <a class="nav-item sub" onclick="showPage('u5-rdd')">RDDs</a>
+      <a class="nav-item sub" onclick="showPage('u5-transformations')">Transformations & Actions</a>
+      <a class="nav-item sub" onclick="showPage('u5-sparksql')">Spark SQL</a>
+    </details>
 
     <div class="nav-section-label">Final Reference</div>
     <a class="nav-item special" onclick="showPage('cheatsheet')">📋 Master Cheat Sheet</a>
