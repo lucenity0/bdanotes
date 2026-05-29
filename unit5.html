@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 5 — BDA Complete Notes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+:root{--bg:#0a0a0f;--bg2:#11111a;--bg3:#1a1a28;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--accent:#7c6aff;--accent2:#a78bfa;--accent3:#38bdf8;--green:#4ade80;--orange:#fb923c;--red:#f87171;--yellow:#fbbf24;--pink:#f472b6;--text:#e2e8f0;--muted:#94a3b8;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;--display:'Syne',sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.7;}
+.header{background:linear-gradient(135deg,#1a1040 0%,#0d1a2e 50%,#0a0a0f 100%);border-bottom:1px solid var(--border2);padding:28px 24px 18px;position:sticky;top:0;z-index:100;}
+.header-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px;}
+.header h1{font-family:var(--display);font-size:24px;font-weight:800;color:#fff;letter-spacing:-0.5px;}
+.header h1 span{color:var(--accent2);}
+.exam-badge{background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);color:var(--yellow);padding:4px 14px;border-radius:20px;font-size:12px;font-weight:600;}
+.nav{display:flex;gap:6px;flex-wrap:wrap;}
+.nav-btn{padding:6px 14px;border-radius:8px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s;font-family:var(--sans);}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent2);}
+.nav-btn.active{background:rgba(124,106,255,0.15);border-color:var(--accent);color:var(--accent2);}
+.container{max-width:960px;margin:0 auto;padding:24px;}
+.section{display:none;}
+.section.active{display:block;}
+.sec-header{margin-bottom:20px;}
+.sec-header h2{font-family:var(--display);font-size:22px;font-weight:700;color:#fff;margin-bottom:4px;}
+.sec-header p{color:var(--muted);font-size:13px;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:12px;}
+.card-title{font-family:var(--display);font-size:14px;font-weight:700;color:#fff;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.card-body{color:var(--text);font-size:13px;line-height:1.75;}
+.card.al{border-left:3px solid var(--accent);}
+.card.gl{border-left:3px solid var(--green);}
+.card.ol{border-left:3px solid var(--orange);}
+.card.rl{border-left:3px solid var(--red);}
+.card.yl{border-left:3px solid var(--yellow);}
+.card.pl{border-left:3px solid var(--pink);}
+pre{background:#060810;border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--mono);font-size:12px;line-height:1.65;overflow-x:auto;margin:8px 0;color:#e2e8f0;white-space:pre;}
+.cm{color:#64748b;}.ck{color:#a78bfa;}.cs{color:#4ade80;}.cn{color:#38bdf8;}.cf{color:#fb923c;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:0.05em;text-transform:uppercase;margin-right:4px;}
+.b-hot{background:rgba(248,113,113,0.2);color:var(--red);border:1px solid rgba(248,113,113,0.3);}
+.b-imp{background:rgba(251,191,36,0.2);color:var(--yellow);border:1px solid rgba(251,191,36,0.3);}
+.b-tip{background:rgba(74,222,128,0.15);color:var(--green);border:1px solid rgba(74,222,128,0.3);}
+.b-scala{background:rgba(167,139,250,0.15);color:var(--accent2);border:1px solid rgba(167,139,250,0.3);}
+.b-spark{background:rgba(56,189,248,0.15);color:var(--accent3);border:1px solid rgba(56,189,248,0.3);}
+.b-pyq{background:rgba(244,114,182,0.15);color:var(--pink);border:1px solid rgba(244,114,182,0.3);}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:12.5px;}
+th{background:var(--bg3);color:var(--muted);text-align:left;padding:7px 10px;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--border2);}
+td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+.tg{color:var(--green);font-family:var(--mono);font-size:11.5px;}
+.tb{color:var(--accent3);font-weight:600;}
+.tr{color:var(--red);}
+.alert{border-radius:8px;padding:10px 14px;margin:10px 0;font-size:13px;display:flex;gap:10px;align-items:flex-start;}
+.aw{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);}
+.ah{background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.25);}
+.at{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.25);}
+.ai{font-size:16px;flex-shrink:0;margin-top:1px;}
+.compare{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0;}
+@media(max-width:600px){.compare{grid-template-columns:1fr;}.g2{grid-template-columns:1fr !important;}}
+.cc{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:14px;}
+.cc h4{font-size:13px;font-weight:700;margin-bottom:6px;}
+.cc p{font-size:12px;color:var(--muted);line-height:1.6;}
+.cc pre{margin:8px 0 0;font-size:11px;}
+.cc-p h4{color:var(--accent2);}.cc-g h4{color:var(--green);}.cc-b h4{color:var(--accent3);}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+ul.notes{padding-left:18px;}
+ul.notes li{margin-bottom:5px;font-size:13px;}
+ul.notes li strong{color:#fff;}
+.sub{font-family:var(--display);font-size:15px;font-weight:700;color:var(--accent2);margin:20px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border);}
+mark{background:rgba(124,106,255,0.2);color:var(--accent2);padding:1px 5px;border-radius:4px;}
+.hg{background:rgba(74,222,128,0.15);color:var(--green);padding:1px 5px;border-radius:4px;}
+.hr{background:rgba(248,113,113,0.15);color:var(--red);padding:1px 5px;border-radius:4px;}
+.hb{background:rgba(56,189,248,0.15);color:var(--accent3);padding:1px 5px;border-radius:4px;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-top">
+    <h1>Unit 5 — <span>Scala &amp; Spark</span> Complete Notes</h1>
+    <div class="exam-badge">⚡ Exam today — read this during Unit 4</div>
+  </div>
+  <div class="nav">
+    <button class="nav-btn active" onclick="show('s1',this)">Scala Basics</button>
+    <button class="nav-btn" onclick="show('s2',this)">Arrays &amp; Maps &amp; Tuples</button>
+    <button class="nav-btn" onclick="show('s3',this)">Spark Intro + Architecture</button>
+    <button class="nav-btn" onclick="show('s4',this)">RDDs</button>
+    <button class="nav-btn" onclick="show('s5',this)">reduce / fold / aggregate ⚠️</button>
+    <button class="nav-btn" onclick="show('s6',this)">Spark SQL</button>
+    <button class="nav-btn" onclick="show('s7',this)">All Programs (PYQ)</button>
+    <a class="nav-btn" href="bda_study.html" style="text-decoration:none;display:inline-flex;align-items:center;">Back to Study Hub</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- SCALA BASICS -->
+<div id="s1" class="section active">
+<div class="sec-header"><h2>Scala Basics</h2><p>val · var · lazy val · def · if/else · for loops · functions · exceptions</p></div>
+
+<div class="alert ah"><span class="ai">🔥</span><span><strong>val vs lazy val vs def</strong> — asked in Dec 2025 and Aug 2025 papers. Know the exact difference.</span></div>
+
+<div class="card al">
+<div class="card-title"><span class="badge b-imp">IMP</span>val vs var vs lazy val vs def</div>
+<div class="card-body">
+<pre><span class="ck">val</span> x = expensive()       <span class="cm">// evaluated IMMEDIATELY, stored, IMMUTABLE</span>
+<span class="ck">var</span> x = expensive()       <span class="cm">// evaluated IMMEDIATELY, stored, MUTABLE</span>
+<span class="ck">lazy val</span> x = expensive()  <span class="cm">// evaluated FIRST TIME accessed, then stored</span>
+<span class="ck">def</span> x = expensive()       <span class="cm">// evaluated EVERY TIME called, never stored</span></pre>
+<table>
+<tr><th>Keyword</th><th>When evaluated</th><th>Stored?</th><th>Mutable?</th></tr>
+<tr><td class="tb">val</td><td>At definition time</td><td>Yes</td><td class="tr">No (immutable)</td></tr>
+<tr><td class="tb">var</td><td>At definition time</td><td>Yes</td><td class="tg">Yes</td></tr>
+<tr><td class="tb">lazy val</td><td>First access only</td><td>Yes (after 1st use)</td><td class="tr">No</td></tr>
+<tr><td class="tb">def</td><td>Every single call</td><td>Never</td><td>N/A</td></tr>
+</table>
+<p style="margin-top:8px;color:var(--muted);">lazy val = halfway between val (evaluates once) and def (evaluates every time)</p>
+</div>
+</div>
+
+<div class="g2">
+<div class="card gl">
+<div class="card-title">Declaring Values</div>
+<div class="card-body">
+<pre><span class="ck">val</span> answer = <span class="cn">8</span> * <span class="cn">5</span> + <span class="cn">2</span>       <span class="cm">// Int, inferred</span>
+<span class="ck">val</span> s: <span class="cn">String</span> = <span class="cs">"Hello"</span>        <span class="cm">// explicit type</span>
+<span class="ck">var</span> counter = <span class="cn">0</span>
+counter = <span class="cn">1</span>                    <span class="cm">// OK for var</span>
+<span class="cm">// answer = 0  // ERROR: val is immutable</span>
+<span class="ck">val</span> xmax, ymax = <span class="cn">100</span>         <span class="cm">// both = 100</span></pre>
+</div>
+</div>
+<div class="card">
+<div class="card-title">if / else (returns a value!)</div>
+<div class="card-body">
+<pre><span class="cm">// In Scala, if/else HAS a value</span>
+<span class="ck">val</span> s = <span class="ck">if</span> (x > <span class="cn">0</span>) <span class="cn">1</span> <span class="ck">else</span> -<span class="cn">1</span>
+<span class="cm">// same as Java's: x > 0 ? 1 : -1</span>
+
+<span class="cm">// Missing else = Unit (like void)</span>
+<span class="ck">if</span> (x > <span class="cn">0</span>) <span class="cn">1</span>
+<span class="cm">// equivalent to: if(x>0) 1 else ()</span></pre>
+</div>
+</div>
+</div>
+
+<div class="sub">for Loops</div>
+<div class="card yl">
+<div class="card-title"><span class="badge b-imp">IMP</span>Advanced for loops — generators, guards, yield</div>
+<div class="card-body">
+<pre><span class="cm">// Basic range</span>
+<span class="ck">for</span> (i <- <span class="cn">1</span> to <span class="cn">5</span>) println(i)      <span class="cm">// 1 2 3 4 5 (to = inclusive)</span>
+<span class="ck">for</span> (i <- <span class="cn">1</span> until <span class="cn">5</span>) println(i)   <span class="cm">// 1 2 3 4 (until = excludes last)</span>
+<span class="ck">for</span> (i <- <span class="cn">10</span> to <span class="cn">0</span> by -<span class="cn">1</span>) println(i) <span class="cm">// countdown 10..0</span>
+
+<span class="cm">// Multiple generators (nested loop effect)</span>
+<span class="ck">for</span> (i <- <span class="cn">1</span> to <span class="cn">3</span>; j <- <span class="cn">1</span> to <span class="cn">3</span>) print(f<span class="cs">"${10*i+j}%3d"</span>)
+<span class="cm">// Output: 11 12 13 21 22 23 31 32 33</span>
+
+<span class="cm">// Guard — filter condition (NO semicolon before if!)</span>
+<span class="ck">for</span> (i <- <span class="cn">1</span> to <span class="cn">3</span>; j <- <span class="cn">1</span> to <span class="cn">3</span> <span class="ck">if</span> i != j) print(f<span class="cs">"${10*i+j}%3d"</span>)
+<span class="cm">// Output: 12 13 21 23 31 32</span>
+
+<span class="cm">// With definition inside loop</span>
+<span class="ck">for</span> (i <- <span class="cn">1</span> to <span class="cn">3</span>; from = <span class="cn">4</span> - i; j <- from to <span class="cn">3</span>) print(f<span class="cs">"${10*i+j}%3d"</span>)
+<span class="cm">// Output: 13 22 23 31 32 33</span>
+
+<span class="cm">// yield — builds a collection (for comprehension)</span>
+<span class="ck">val</span> result = <span class="ck">for</span> (i <- <span class="cn">1</span> to <span class="cn">10</span>) <span class="ck">yield</span> i % <span class="cn">3</span>
+<span class="cm">// Vector(1, 2, 0, 1, 2, 0, 1, 2, 0, 1)</span></pre>
+</div>
+</div>
+
+<div class="sub">Functions</div>
+<div class="card">
+<div class="card-title">Defining Functions</div>
+<div class="card-body">
+<pre><span class="cm">// Basic — return type inferred (not needed unless recursive)</span>
+<span class="ck">def</span> abs(x: <span class="cn">Double</span>) = <span class="ck">if</span> (x >= <span class="cn">0</span>) x <span class="ck">else</span> -x
+
+<span class="cm">// Multi-line — last expression is return value</span>
+<span class="ck">def</span> fac(n: <span class="cn">Int</span>) = {
+  <span class="ck">var</span> r = <span class="cn">1</span>
+  <span class="ck">for</span> (i <- <span class="cn">1</span> to n) r = r * i
+  r   <span class="cm">// returned — no return keyword needed</span>
+}
+
+<span class="cm">// Recursive — MUST specify return type</span>
+<span class="ck">def</span> fac(n: <span class="cn">Int</span>): <span class="cn">Int</span> = <span class="ck">if</span> (n <= <span class="cn">0</span>) <span class="cn">1</span> <span class="ck">else</span> n * fac(n - <span class="cn">1</span>)
+
+<span class="cm">// Default arguments</span>
+<span class="ck">def</span> decorate(str: <span class="cn">String</span>, left: <span class="cn">String</span> = <span class="cs">"["</span>, right: <span class="cn">String</span> = <span class="cs">"]"</span>) = left + str + right
+decorate(<span class="cs">"Hello"</span>)           <span class="cm">// "[Hello]"</span>
+decorate(<span class="cs">"Hello"</span>, <span class="cs">"&lt;&lt;&lt;"</span>, <span class="cs">"&gt;&gt;&gt;"</span>) <span class="cm">// "&lt;&lt;&lt;Hello&gt;&gt;&gt;"</span>
+
+<span class="cm">// Variable args</span>
+<span class="ck">def</span> sum(args: <span class="cn">Int</span>*) = { <span class="ck">var</span> r = <span class="cn">0</span>; <span class="ck">for</span> (a <- args) r += a; r }
+sum(<span class="cn">1</span>, <span class="cn">4</span>, <span class="cn">9</span>)         <span class="cm">// 14</span>
+sum(<span class="cn">1</span> to <span class="cn">5</span>: _*)      <span class="cm">// pass range as varargs</span>
+
+<span class="cm">// Procedure (returns Unit, no = sign)</span>
+<span class="ck">def</span> printBox(s: <span class="cn">String</span>) {
+  <span class="ck">val</span> border = <span class="cs">"-"</span> * (s.length + <span class="cn">2</span>)
+  println(s<span class="cs">"$border\n|$s|\n$border"</span>)
+}</pre>
+</div>
+</div>
+
+<div class="card pl">
+<div class="card-title"><span class="badge b-imp">IMP</span>Exception Handling</div>
+<div class="card-body">
+<pre><span class="cm">// throw — type is Nothing</span>
+<span class="ck">throw new</span> IllegalArgumentException(<span class="cs">"x should not be negative"</span>)
+
+<span class="cm">// try / catch / finally</span>
+<span class="ck">try</span> {
+  process(input)
+} <span class="ck">catch</span> {
+  <span class="ck">case</span> ex: IllegalArgumentException => println(<span class="cs">"Bad arg: "</span> + ex.getMessage)
+  <span class="ck">case</span> ex: Exception                 => println(<span class="cs">"Other error"</span>)
+} <span class="ck">finally</span> {
+  <span class="cm">// ALWAYS runs — use for cleanup (close files etc)</span>
+  in.close()
+}
+
+<span class="cm">// if/else with throw — type of expression is Double (other branch)</span>
+<span class="ck">if</span> (x >= <span class="cn">0</span>) { Math.sqrt(x) }
+<span class="ck">else</span> <span class="ck">throw new</span> IllegalArgumentException(<span class="cs">"x negative"</span>)</pre>
+</div>
+</div>
+</div>
+
+<!-- ARRAYS MAPS TUPLES -->
+<div id="s2" class="section">
+<div class="sec-header"><h2>Arrays, Maps &amp; Tuples</h2><p>Fixed arrays · ArrayBuffer · mutable/immutable Maps · Tuples · zip</p></div>
+
+<div class="alert ah"><span class="ai">🔥</span><span>ArrayBuffer fruits program appeared VERBATIM in June 2025, Dec 2025, Aug 2025. Memorize it cold.</span></div>
+
+<div class="g2">
+<div class="card">
+<div class="card-title">Fixed Array</div>
+<div class="card-body">
+<pre><span class="ck">val</span> nums = <span class="ck">new</span> <span class="cn">Array</span>[<span class="cn">Int</span>](<span class="cn">10</span>)   <span class="cm">// all zeros</span>
+<span class="ck">val</span> a = <span class="ck">new</span> <span class="cn">Array</span>[<span class="cn">String</span>](<span class="cn">10</span>)  <span class="cm">// all null</span>
+<span class="ck">val</span> s = <span class="cn">Array</span>(<span class="cs">"Hi"</span>, <span class="cs">"Bye"</span>)     <span class="cm">// no 'new' with values</span>
+s(<span class="cn">0</span>)  <span class="cm">// "Hi" — use () not []!</span>
+
+<span class="cm">// 2D</span>
+<span class="ck">val</span> m = <span class="cn">Array</span>.ofDim[<span class="cn">Double</span>](<span class="cn">3</span>,<span class="cn">4</span>)
+m(<span class="cn">0</span>)(<span class="cn">1</span>) = <span class="cn">42.0</span>
+
+<span class="cm">// Useful methods</span>
+<span class="cn">Array</span>(<span class="cn">1</span>,<span class="cn">7</span>,<span class="cn">2</span>,<span class="cn">9</span>).sum     <span class="cm">// 19</span>
+<span class="cn">Array</span>(<span class="cn">1</span>,<span class="cn">7</span>,<span class="cn">2</span>,<span class="cn">9</span>).max     <span class="cm">// 9</span>
+<span class="cn">Array</span>(<span class="cn">1</span>,<span class="cn">7</span>,<span class="cn">2</span>,<span class="cn">9</span>).sorted  <span class="cm">// Array(1,2,7,9)</span>
+a.mkString(<span class="cs">", "</span>)          <span class="cm">// "1, 7, 2, 9"</span></pre>
+</div>
+</div>
+<div class="card gl">
+<div class="card-title">ArrayBuffer operations</div>
+<div class="card-body">
+<pre><span class="ck">import</span> scala.collection.mutable.ArrayBuffer
+<span class="ck">val</span> b = <span class="cn">ArrayBuffer</span>[<span class="cn">Int</span>]()
+
+b += <span class="cn">1</span>                  <span class="cm">// add one</span>
+b += (<span class="cn">1</span>, <span class="cn">2</span>, <span class="cn">3</span>)          <span class="cm">// add multiple</span>
+b ++= <span class="cn">Array</span>(<span class="cn">8</span>, <span class="cn">13</span>)      <span class="cm">// append collection</span>
+b.trimEnd(<span class="cn">2</span>)            <span class="cm">// remove last 2</span>
+b.insert(<span class="cn">2</span>, <span class="cn">6</span>)         <span class="cm">// insert at index 2</span>
+b.remove(<span class="cn">2</span>)            <span class="cm">// remove at index 2</span>
+b.remove(<span class="cn">2</span>, <span class="cn">3</span>)         <span class="cm">// remove 3 from index 2</span>
+b.sortWith(_ > _)        <span class="cm">// sort descending</span>
+b.sorted                 <span class="cm">// sort ascending</span>
+b.toArray                <span class="cm">// convert to Array</span></pre>
+</div>
+</div>
+</div>
+
+<div class="card rl">
+<div class="card-title"><span class="badge b-pyq">PYQ x3</span>THE Fruits Program — write this from memory</div>
+<div class="card-body">
+<pre><span class="ck">import</span> scala.collection.mutable.ArrayBuffer
+
+<span class="cm">// 1. Create with initial elements</span>
+<span class="ck">val</span> fruits = <span class="cn">ArrayBuffer</span>(<span class="cs">"Apple"</span>, <span class="cs">"Banana"</span>, <span class="cs">"Mango"</span>, <span class="cs">"Orange"</span>)
+
+<span class="cm">// 2. Append Strawberry and Pineapple</span>
+fruits ++= <span class="cn">Array</span>(<span class="cs">"Strawberry"</span>, <span class="cs">"Pineapple"</span>)
+<span class="cm">// ArrayBuffer(Apple, Banana, Mango, Orange, Strawberry, Pineapple)</span>
+
+<span class="cm">// 3. Sort descending</span>
+<span class="ck">val</span> sorted = fruits.sortWith(_ > _)
+<span class="cm">// ArrayBuffer(Strawberry, Pineapple, Orange, Mango, Banana, Apple)</span>
+
+<span class="cm">// 4. Remove last 2</span>
+sorted.trimEnd(<span class="cn">2</span>)
+<span class="cm">// ArrayBuffer(Strawberry, Pineapple, Orange, Mango)</span>
+
+<span class="cm">// 5. Convert to Array</span>
+<span class="ck">val</span> arr = sorted.toArray
+println(arr.mkString(<span class="cs">", "</span>))
+<span class="cm">// Output: Strawberry, Pineapple, Orange, Mango</span></pre>
+</div>
+</div>
+
+<div class="sub">Maps</div>
+<div class="card al">
+<div class="card-title"><span class="badge b-imp">IMP</span>Mutable vs Immutable Maps</div>
+<div class="card-body">
+<pre><span class="cm">// IMMUTABLE (default) — cannot change</span>
+<span class="ck">val</span> scores = <span class="cn">Map</span>(<span class="cs">"Alice"</span> -> <span class="cn">10</span>, <span class="cs">"Bob"</span> -> <span class="cn">3</span>, <span class="cs">"Cindy"</span> -> <span class="cn">8</span>)
+
+<span class="cm">// MUTABLE — add/update/remove keys</span>
+<span class="ck">val</span> sc = scala.collection.mutable.<span class="cn">Map</span>(<span class="cs">"Alice"</span> -> <span class="cn">10</span>, <span class="cs">"Bob"</span> -> <span class="cn">3</span>)
+sc(<span class="cs">"Bob"</span>) = <span class="cn">20</span>                       <span class="cm">// update existing</span>
+sc(<span class="cs">"Fred"</span>) = <span class="cn">7</span>                       <span class="cm">// add new</span>
+sc += (<span class="cs">"Alice"</span> -> <span class="cn">15</span>, <span class="cs">"Zara"</span> -> <span class="cn">5</span>) <span class="cm">// add multiple</span>
+sc -= <span class="cs">"Alice"</span>                        <span class="cm">// remove key</span>
+
+<span class="cm">// Accessing</span>
+<span class="ck">val</span> b = scores(<span class="cs">"Bob"</span>)                 <span class="cm">// 3 (throws if not found)</span>
+<span class="ck">val</span> b = scores.getOrElse(<span class="cs">"Bob"</span>, <span class="cn">0</span>)   <span class="cm">// safe — returns 0 if missing</span>
+scores.contains(<span class="cs">"Bob"</span>)               <span class="cm">// true/false</span>
+
+<span class="cm">// Iterating</span>
+<span class="ck">for</span> ((k, v) <- scores) println(s<span class="cs">"$k -> $v"</span>)
+scores.keySet                           <span class="cm">// all keys</span>
+<span class="ck">for</span> (v <- scores.values) println(v)   <span class="cm">// all values</span>
+<span class="ck">for</span> ((k, v) <- scores) <span class="ck">yield</span> (v, k)  <span class="cm">// reverse map</span>
+
+<span class="cm">// Sorted map</span>
+<span class="ck">val</span> sorted = scala.collection.mutable.<span class="cn">SortedMap</span>(<span class="cs">"Bob"</span>-><span class="cn">3</span>, <span class="cs">"Alice"</span>-><span class="cn">10</span>)</pre>
+</div>
+</div>
+
+<div class="sub">Tuples</div>
+<div class="card">
+<div class="card-title">Tuples — group mixed types</div>
+<div class="card-body">
+<pre><span class="cm">// Create</span>
+<span class="ck">val</span> t = (<span class="cn">1</span>, <span class="cn">3.14</span>, <span class="cs">"Fred"</span>)  <span class="cm">// type: (Int, Double, String)</span>
+
+<span class="cm">// Access — starts at _1 (NOT 0!)</span>
+t._1  <span class="cm">// 1</span>
+t._2  <span class="cm">// 3.14</span>
+t._3  <span class="cm">// "Fred"</span>
+
+<span class="cm">// partition() returns pair of strings</span>
+<span class="cs">"New York"</span>.partition(_.isUpper)  <span class="cm">// ("NY", "ew ork")</span>
+
+<span class="cm">// zip — bundle two arrays into pairs</span>
+<span class="ck">val</span> symbols = <span class="cn">Array</span>(<span class="cs">"&lt;"</span>, <span class="cs">"-"</span>, <span class="cs">"&gt;"</span>)
+<span class="ck">val</span> counts  = <span class="cn">Array</span>(<span class="cn">2</span>, <span class="cn">10</span>, <span class="cn">2</span>)
+<span class="ck">val</span> pairs = symbols.zip(counts)    <span class="cm">// Array(("&lt;",2), ("-",10), ("&gt;",2))</span>
+<span class="ck">for</span> ((s, n) <- pairs) print(s * n) <span class="cm">// &lt;&lt;----------&gt;&gt;</span></pre>
+</div>
+</div>
+</div>
+
+<!-- SPARK INTRO -->
+<div id="s3" class="section">
+<div class="sec-header"><h2>Apache Spark — Intro &amp; Architecture</h2><p>What is Spark · unified stack · architecture diagram · Spark vs Hadoop</p></div>
+
+<div class="card al">
+<div class="card-title">What is Apache Spark?</div>
+<div class="card-body">
+<ul class="notes">
+<li><strong>Cluster computing platform</strong> — fast and general-purpose</li>
+<li>Extends MapReduce to support interactive queries and stream processing</li>
+<li>Key feature: runs computations <strong>in-memory</strong> — 100× faster than Hadoop</li>
+<li>Core abstraction: <strong>RDD</strong> (Resilient Distributed Dataset)</li>
+<li>Two user groups: Data Scientists (ad-hoc analysis via shells) and Engineers (production pipelines)</li>
+</ul>
+</div>
+</div>
+
+<div class="sub">Spark Unified Stack — Components</div>
+<div class="card">
+<div class="card-body">
+<table>
+<tr><th>Component</th><th>Purpose</th></tr>
+<tr><td class="tb">Spark Core</td><td>Task scheduling, memory management, fault recovery, RDD API. Foundation for everything.</td></tr>
+<tr><td class="tb">Spark SQL</td><td>Structured data via SQL and HiveQL. JSON, Parquet, Hive sources.</td></tr>
+<tr><td class="tb">Spark Streaming</td><td>Real-time stream processing (log files, message queues). Micro-batching.</td></tr>
+<tr><td class="tb">MLlib</td><td>ML algorithms — classification, regression, clustering, collaborative filtering.</td></tr>
+<tr><td class="tb">GraphX</td><td>Graph computation — social networks. subgraph, mapVertices operators.</td></tr>
+</table>
+<p style="margin-top:8px;color:var(--muted);">Tight integration benefit: improving Spark Core automatically speeds up SQL, MLlib, streaming. One system instead of 5-10 separate ones.</p>
+</div>
+</div>
+
+<div class="sub">Architecture — Draw This in Exam</div>
+<div class="card rl">
+<div class="card-title"><span class="badge b-hot">EXAM DIAGRAM</span>Spark Architecture</div>
+<div class="card-body">
+<pre>
+  +--------------------------------------------------+
+  |              DRIVER PROGRAM                      |
+  |  SparkContext  (creates RDDs, sends tasks)       |
+  +---------------------------+----------------------+
+                              |
+              +---------------v------------------+
+              |         CLUSTER MANAGER           |
+              |   YARN  /  Mesos  /  Standalone   |
+              +--------+----------+--------------+
+                       |          |
+            +----------v--+  +----v----------+
+            | WORKER NODE |  | WORKER NODE   |
+            | +----------+|  | +-----------+ |
+            | | Executor ||  | | Executor  | |
+            | | Task Task||  | | Task Task | |
+            | | Cache    ||  | | Cache     | |
+            | +----------+|  | +-----------+ |
+            +-------------+  +---------------+
+</pre>
+<ul class="notes" style="margin-top:10px;">
+<li><strong>Driver</strong> — contains SparkContext, runs user's main(), creates task DAG</li>
+<li><strong>SparkContext</strong> — entry point, connects to cluster manager</li>
+<li><strong>Cluster Manager</strong> — allocates resources (supports YARN, Mesos, Standalone)</li>
+<li><strong>Worker Node</strong> — physical/virtual machine running executors</li>
+<li><strong>Executor</strong> — JVM process that runs tasks and caches data for the application</li>
+</ul>
+</div>
+</div>
+
+<div class="sub">Storage Layers</div>
+<div class="card">
+<div class="card-body">
+<p>Spark can read from: <span class="hg">HDFS</span> &nbsp;<span class="hg">Local filesystem</span> &nbsp;<span class="hg">Amazon S3</span> &nbsp;<span class="hg">Cassandra</span> &nbsp;<span class="hg">HBase</span> &nbsp;<span class="hg">Hive</span></p>
+<p style="margin-top:8px;color:var(--muted);">Spark does NOT require Hadoop — it just supports systems implementing Hadoop APIs. Supports text files, SequenceFiles, Avro, Parquet, any Hadoop InputFormat.</p>
+</div>
+</div>
+
+<div class="sub">Spark vs Hadoop</div>
+<div class="card">
+<div class="card-body">
+<table>
+<tr><th>Feature</th><th>Apache Spark</th><th>Hadoop MapReduce</th></tr>
+<tr><td>Speed</td><td class="tg">100× faster (in-memory)</td><td>Slower (disk I/O)</td></tr>
+<tr><td>Processing</td><td class="tg">Real-time + Batch</td><td class="tr">Batch only</td></tr>
+<tr><td>Difficulty</td><td class="tg">Easy (high-level APIs)</td><td class="tr">Complex</td></tr>
+<tr><td>Recovery</td><td>Partition recovery via lineage</td><td>Full fault-tolerance (replication)</td></tr>
+<tr><td>Interactivity</td><td class="tg">Interactive shell (REPL)</td><td class="tr">No (except Pig/Hive)</td></tr>
+<tr><td>Language</td><td>Scala, Python, Java, R</td><td>Java primarily</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<!-- RDDs -->
+<div id="s4" class="section">
+<div class="sec-header"><h2>RDDs — Resilient Distributed Datasets</h2><p>Creating · transformations · actions · lazy evaluation · persistence</p></div>
+
+<div class="card al">
+<div class="card-title">What is an RDD?</div>
+<div class="card-body">
+<ul class="notes">
+<li>RDD = <strong>Resilient Distributed Dataset</strong></li>
+<li>An <strong>immutable</strong>, distributed collection of objects</li>
+<li>Split into <strong>partitions</strong> across cluster nodes</li>
+<li>Two types of operations: <strong>Transformations</strong> (lazy, return RDD) and <strong>Actions</strong> (eager, return value)</li>
+<li>Spark tracks <strong>lineage</strong> — DAG of dependencies — for fault recovery</li>
+</ul>
+</div>
+</div>
+
+<div class="g2">
+<div class="card gl">
+<div class="card-title">Creating RDDs</div>
+<div class="card-body">
+<pre><span class="cm">// From file (most common)</span>
+<span class="ck">val</span> lines = sc.textFile(<span class="cs">"README.md"</span>)
+
+<span class="cm">// From in-memory collection</span>
+<span class="ck">val</span> data = sc.parallelize(
+  <span class="cn">List</span>(<span class="cs">"hello world"</span>, <span class="cs">"hi"</span>)
+)
+
+<span class="cm">// From another RDD (transformation)</span>
+<span class="ck">val</span> words = data.flatMap(_.split(<span class="cs">" "</span>))</pre>
+</div>
+</div>
+<div class="card yl">
+<div class="card-title">Lazy Evaluation</div>
+<div class="card-body">
+<pre><span class="ck">val</span> rdd = sc.textFile(<span class="cs">"file.txt"</span>)
+<span class="cm">// NOTHING runs yet — Spark records plan</span>
+
+<span class="ck">val</span> errors = rdd.filter(_.contains(<span class="cs">"error"</span>))
+<span class="cm">// STILL nothing runs</span>
+
+errors.count()
+<span class="cm">// NOW Spark executes the full plan!</span></pre>
+<p style="margin-top:8px;color:var(--muted);">Transformations just build a DAG. Actions trigger execution.</p>
+</div>
+</div>
+</div>
+
+<div class="alert ah"><span class="ai">⚠️</span><span><strong>Key rule:</strong> If return type is RDD → Transformation (lazy). If return type is a value/Unit → Action (triggers execution). Transformations can be chained; an Action at the end executes all of them.</span></div>
+
+<div class="g2">
+<div class="card">
+<div class="card-title">Common Transformations</div>
+<div class="card-body">
+<table>
+<tr><th>Function</th><th>Result on {1,2,3,3}</th></tr>
+<tr><td class="tb">map(x => x+1)</td><td class="tg">{2,3,4,4}</td></tr>
+<tr><td class="tb">filter(x => x!=1)</td><td class="tg">{2,3,3}</td></tr>
+<tr><td class="tb">flatMap(x => x.to(3))</td><td class="tg">{1,2,3,2,3,3,3}</td></tr>
+<tr><td class="tb">distinct()</td><td class="tg">{1,2,3}</td></tr>
+<tr><td class="tb">union(other {3,4,5})</td><td class="tg">{1,2,3,3,4,5}</td></tr>
+<tr><td class="tb">intersection(other)</td><td class="tg">{3}</td></tr>
+<tr><td class="tb">subtract(other)</td><td class="tg">{1,2}</td></tr>
+</table>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Common Actions</div>
+<div class="card-body">
+<table>
+<tr><th>Action</th><th>Result on {1,2,3,3}</th></tr>
+<tr><td class="tb">collect()</td><td class="tg">[1,2,3,3]</td></tr>
+<tr><td class="tb">count()</td><td class="tg">4</td></tr>
+<tr><td class="tb">first()</td><td class="tg">1</td></tr>
+<tr><td class="tb">take(2)</td><td class="tg">[1,2]</td></tr>
+<tr><td class="tb">top(2)</td><td class="tg">[3,3]</td></tr>
+<tr><td class="tb">reduce(_ + _)</td><td class="tg">9</td></tr>
+<tr><td class="tb">foreach(println)</td><td class="tg">prints each</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<div class="g2">
+<div class="card gl">
+<div class="card-title">map() vs flatMap()</div>
+<div class="card-body">
+<pre><span class="cm">// map: one element in, one element out</span>
+<span class="ck">val</span> sq = sc.parallelize(<span class="cn">List</span>(<span class="cn">1</span>,<span class="cn">2</span>,<span class="cn">3</span>,<span class="cn">4</span>)).map(x => x*x)
+<span class="cm">// {1, 4, 9, 16}</span>
+
+<span class="cm">// flatMap: one in, ZERO or MORE out (then flatten)</span>
+<span class="ck">val</span> words = sc.parallelize(<span class="cn">List</span>(<span class="cs">"hello world"</span>, <span class="cs">"hi"</span>))
+              .flatMap(_.split(<span class="cs">" "</span>))
+<span class="cm">// {"hello", "world", "hi"}</span>
+<span class="cm">// map would give: {["hello","world"], ["hi"]}</span></pre>
+</div>
+</div>
+<div class="card pl">
+<div class="card-title">Persistence / Caching</div>
+<div class="card-body">
+<pre><span class="cm">// Default: RDD recomputed on every action</span>
+<span class="cm">// Use persist() to cache:</span>
+<span class="ck">val</span> result = input.map(x => x*x)
+result.persist()   <span class="cm">// or .cache()</span>
+result.count()     <span class="cm">// compute + cache</span>
+result.collect()   <span class="cm">// uses cached data</span></pre>
+<p style="margin-top:8px;color:var(--muted);">Storage levels: MEMORY_ONLY · MEMORY_AND_DISK · DISK_ONLY · MEMORY_ONLY_SER</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- REDUCE FOLD AGGREGATE -->
+<div id="s5" class="section">
+<div class="sec-header"><h2>reduce() vs fold() vs aggregate()</h2><p>The most-asked Unit 5 question — appears in EVERY paper</p></div>
+
+<div class="alert ah"><span class="ai">🔥</span><span><strong>The constraint:</strong> reduce() and fold() — return type MUST match RDD element type. aggregate() breaks this — can return ANY different type. This distinction IS the question.</span></div>
+
+<div class="compare">
+<div class="cc cc-p">
+<h4>reduce(f)</h4>
+<p>No zero value. Return type = RDD element type. Apply binary function repeatedly.</p>
+<pre>rdd.reduce((x,y) => x + y)
+rdd.reduce(_ min _)
+rdd.reduce(_ max _)</pre>
+</div>
+<div class="cc cc-g">
+<h4>fold(zero)(f)</h4>
+<p>HAS zero value (identity element). Return type = RDD element type. Zero applied to each partition first.</p>
+<pre><span class="cm">// 0 is identity for +</span>
+rdd.fold(0)((acc,x) => acc+x)
+<span class="cm">// 1 is identity for *</span>
+rdd.fold(1)(_ * _)</pre>
+</div>
+<div class="cc cc-b">
+<h4>aggregate(zero)(seqOp, combOp)</h4>
+<p>BREAKS the constraint — return type can be ANYTHING. Needs two functions: seqOp and combOp.</p>
+<pre>rdd.aggregate((0,0))(
+  (acc,v) => (acc._1+v, acc._2+1),
+  (a,b) => (a._1+b._1, a._2+b._2)
+)
+<span class="cm">// Returns (sum, count) tuple!</span></pre>
+</div>
+</div>
+
+<div class="card rl">
+<div class="card-title"><span class="badge b-hot">KEY CONCEPT</span>The Constraint &amp; How aggregate() Solves It</div>
+<div class="card-body">
+<ul class="notes">
+<li><span class="hr">Constraint of reduce() and fold()</span>: Return type MUST be same as RDD element type. RDD[Int] → must return Int.</li>
+<li>Problem: computing an <strong>average</strong> needs (sum, count) as a tuple — a different type than Int.</li>
+<li><span class="hg">aggregate() solves this</span>: supply zeroValue of the desired return type, seqOp to combine element with accumulator, combOp to merge partition results.</li>
+</ul>
+</div>
+</div>
+
+<div class="card gl">
+<div class="card-title"><span class="badge b-pyq">PYQ x3</span>Complete Example — all three</div>
+<div class="card-body">
+<pre><span class="ck">val</span> listRdd = sc.parallelize(<span class="cn">List</span>(<span class="cn">1</span>,<span class="cn">2</span>,<span class="cn">3</span>,<span class="cn">4</span>,<span class="cn">5</span>))
+
+<span class="cm">// reduce() — no zero, same return type</span>
+println(listRdd.reduce(_ + _))   <span class="cm">// 15</span>
+println(listRdd.reduce(_ min _)) <span class="cm">// 1</span>
+println(listRdd.reduce(_ max _)) <span class="cm">// 5</span>
+
+<span class="cm">// fold() — has zero value, same return type</span>
+println(listRdd.fold(<span class="cn">0</span>)(_ + _))  <span class="cm">// 15 (identity for + is 0)</span>
+println(listRdd.fold(<span class="cn">1</span>)(_ * _))  <span class="cm">// 120 (identity for * is 1)</span>
+
+<span class="cm">// aggregate() — DIFFERENT return type (tuple for average)</span>
+<span class="ck">val</span> result = listRdd.aggregate((<span class="cn">0</span>, <span class="cn">0</span>))(
+  (acc, v) => (acc._1 + v, acc._2 + <span class="cn">1</span>),     <span class="cm">// seqOp</span>
+  (a, b)   => (a._1 + b._1, a._2 + b._2)      <span class="cm">// combOp</span>
+)
+<span class="ck">val</span> avg = result._1 / result._2.toDouble
+println(s<span class="cs">"Sum=${result._1}, Count=${result._2}, Avg=$avg"</span>)
+<span class="cm">// Sum=15, Count=5, Avg=3.0</span>
+
+<span class="cm">// Sum of RDD using aggregate (simpler example)</span>
+<span class="ck">val</span> listRdd2 = sc.parallelize(<span class="cn">List</span>(<span class="cn">1</span>,<span class="cn">2</span>,<span class="cn">3</span>,<span class="cn">4</span>,<span class="cn">5</span>,<span class="cn">3</span>,<span class="cn">2</span>))
+<span class="ck">def</span> param0 = (accu: <span class="cn">Int</span>, v: <span class="cn">Int</span>) => accu + v
+<span class="ck">def</span> param1 = (accu1: <span class="cn">Int</span>, accu2: <span class="cn">Int</span>) => accu1 + accu2
+<span class="ck">val</span> sum = listRdd2.aggregate(<span class="cn">0</span>)(param0, param1)
+<span class="cm">// Output: 20</span></pre>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Summary Table</div>
+<div class="card-body">
+<table>
+<tr><th>Function</th><th>Zero value?</th><th>Return type constraint</th><th>Use when</th></tr>
+<tr><td class="tb">reduce(f)</td><td class="tr">No</td><td class="tr">Same as RDD elements</td><td>Simple sum, min, max</td></tr>
+<tr><td class="tb">fold(zero)(f)</td><td class="tg">Yes</td><td class="tr">Same as RDD elements</td><td>Need identity value</td></tr>
+<tr><td class="tb">aggregate(zero)(seq,comb)</td><td class="tg">Yes</td><td class="tg">ANY type!</td><td>Need different return type</td></tr>
+<tr><td class="tb">reduceByKey(f)</td><td class="tr">No</td><td class="tr">Same as value type</td><td>Pair RDD — group by key</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<!-- SPARK SQL -->
+<div id="s6" class="section">
+<div class="sec-header"><h2>Spark SQL</h2><p>HiveContext · SQLContext · SchemaRDD · loading data · UDFs</p></div>
+
+<div class="card al">
+<div class="card-title">What is Spark SQL?</div>
+<div class="card-body">
+<ul class="notes">
+<li>Spark's interface for <strong>structured and semi-structured data</strong> (data with a known schema)</li>
+<li>3 capabilities: load from JSON/Hive/Parquet · query with SQL/HQL · mix SQL with RDD code</li>
+<li>Uses <strong>SchemaRDD</strong> — RDD of Row objects that knows its schema</li>
+<li>Two entry points: <strong>HiveContext</strong> (Hive support) vs <strong>SQLContext</strong> (no Hive)</li>
+</ul>
+</div>
+</div>
+
+<div class="card rl">
+<div class="card-title"><span class="badge b-hot">EXAM CODE</span>Spark SQL — Full Example (Scala)</div>
+<div class="card-body">
+<pre><span class="ck">import</span> org.apache.spark.sql.hive.HiveContext
+
+<span class="cm">// 1. Create SparkContext, then HiveContext</span>
+<span class="ck">val</span> sc = <span class="ck">new</span> SparkContext(...)
+<span class="ck">val</span> hiveCtx = <span class="ck">new</span> HiveContext(sc)
+
+<span class="cm">// 2. Load JSON data</span>
+<span class="ck">val</span> input = hiveCtx.jsonFile(inputFile)
+
+<span class="cm">// 3. Register as temporary table</span>
+input.registerTempTable(<span class="cs">"tweets"</span>)
+
+<span class="cm">// 4. Query with SQL</span>
+<span class="ck">val</span> topTweets = hiveCtx.sql(
+  <span class="cs">"SELECT text, retweetCount FROM tweets ORDER BY retweetCount LIMIT 10"</span>
+)
+
+<span class="cm">// 5. Access results</span>
+topTweets.collect().foreach(println)
+
+<span class="cm">// Access by column index</span>
+<span class="ck">val</span> topTweetText = topTweets.map(row => row.getString(<span class="cn">0</span>))</pre>
+</div>
+</div>
+
+<div class="g2">
+<div class="card">
+<div class="card-title">SchemaRDD</div>
+<div class="card-body">
+<ul class="notes">
+<li>RDD of <strong>Row objects</strong>, each = one record</li>
+<li>Knows its <strong>schema</strong> (column names and types)</li>
+<li>Can be used as regular RDD (map, filter)</li>
+<li>Register as temp table for SQL: <code>rdd.registerTempTable("name")</code></li>
+<li>Row access: <code>row.getString(0)</code>, <code>row.getInt(1)</code></li>
+</ul>
+</div>
+</div>
+<div class="card yl">
+<div class="card-title">Caching in Spark SQL</div>
+<div class="card-body">
+<pre><span class="cm">// Use cacheTable — columnar format (more efficient)</span>
+hiveCtx.cacheTable(<span class="cs">"tableName"</span>)
+
+<span class="cm">// NOT the same as RDD.persist()</span>
+<span class="cm">// Stores as in-memory COLUMNAR format</span>
+<span class="cm">// Lost when driver exits</span></pre>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Loading Data</div>
+<div class="card-body">
+<pre><span class="cm">// JSON file</span>
+<span class="ck">val</span> df = hiveCtx.jsonFile(<span class="cs">"data.json"</span>)
+
+<span class="cm">// Hive table</span>
+<span class="ck">val</span> rows = hiveCtx.sql(<span class="cs">"SELECT key, value FROM mytable"</span>)
+<span class="ck">val</span> keys = rows.map(row => row.getInt(<span class="cn">0</span>))
+
+<span class="cm">// From RDD via case class (Scala)</span>
+<span class="ck">case class</span> HappyPerson(name: <span class="cn">String</span>, drink: <span class="cn">String</span>)
+<span class="ck">val</span> rdd = sc.parallelize(<span class="cn">List</span>(HappyPerson(<span class="cs">"Alice"</span>, <span class="cs">"coffee"</span>)))
+rdd.registerTempTable(<span class="cs">"happy_people"</span>)
+hiveCtx.sql(<span class="cs">"SELECT name FROM happy_people"</span>).collect()</pre>
+</div>
+</div>
+
+<div class="card gl">
+<div class="card-title">UDFs — User Defined Functions</div>
+<div class="card-body">
+<pre><span class="cm">// Register a Scala function as SQL UDF</span>
+hiveCtx.registerFunction(<span class="cs">"strLenScala"</span>, (_: <span class="cn">String</span>).length)
+<span class="ck">val</span> r = hiveCtx.sql(<span class="cs">"SELECT strLenScala('tweet') FROM tweets LIMIT 10"</span>)
+
+<span class="cm">// In Python</span>
+hiveCtx.registerFunction(<span class="cs">"strLenPython"</span>, lambda x: len(x), IntegerType())</pre>
+</div>
+</div>
+</div>
+
+<!-- PROGRAMS -->
+<div id="s7" class="section">
+<div class="sec-header"><h2>All Must-Know Programs — PYQ</h2><p>Write each from memory. These are the ones that appear verbatim.</p></div>
+
+<div class="alert ah"><span class="ai">⚠️</span><span>Programs 1, 2, 3, 4 appeared in 3+ papers. Know them cold.</span></div>
+
+<div class="card rl">
+<div class="card-title"><span class="badge b-pyq">PYQ x4</span>P1 — Spark WordCount</div>
+<div class="card-body">
+<pre><span class="ck">val</span> data = sc.textFile(<span class="cs">"sparkdata.txt"</span>)
+
+<span class="ck">val</span> splitdata = data.flatMap(line => line.split(<span class="cs">" "</span>))
+<span class="cm">// lines → individual words</span>
+
+<span class="ck">val</span> mapdata = splitdata.map(word => (word, <span class="cn">1</span>))
+<span class="cm">// words → (word, 1) pairs</span>
+
+<span class="ck">val</span> reducedata = mapdata.reduceByKey(_ + _)
+<span class="cm">// ("hello",1),("hello",1) → ("hello",2)</span>
+
+reducedata.collect().foreach(println)</pre>
+</div>
+</div>
+
+<div class="card rl">
+<div class="card-title"><span class="badge b-pyq">PYQ x3</span>P2 — ArrayBuffer Fruits (write verbatim)</div>
+<div class="card-body">
+<pre><span class="ck">import</span> scala.collection.mutable.ArrayBuffer
+<span class="ck">val</span> fruits = <span class="cn">ArrayBuffer</span>(<span class="cs">"Apple"</span>, <span class="cs">"Banana"</span>, <span class="cs">"Mango"</span>, <span class="cs">"Orange"</span>)
+fruits ++= <span class="cn">Array</span>(<span class="cs">"Strawberry"</span>, <span class="cs">"Pineapple"</span>)
+<span class="ck">val</span> sorted = fruits.sortWith(_ > _)
+sorted.trimEnd(<span class="cn">2</span>)
+<span class="ck">val</span> arr = sorted.toArray
+println(arr.mkString(<span class="cs">", "</span>))</pre>
+</div>
+</div>
+
+<div class="card rl">
+<div class="card-title"><span class="badge b-pyq">PYQ x3</span>P3 — reduce / fold / aggregate with constraint</div>
+<div class="card-body">
+<pre><span class="ck">val</span> rdd = sc.parallelize(<span class="cn">List</span>(<span class="cn">1</span>,<span class="cn">2</span>,<span class="cn">3</span>,<span class="cn">4</span>,<span class="cn">5</span>))
+
+<span class="cm">// reduce — same return type, no zero</span>
+println(rdd.reduce(_ + _))   <span class="cm">// 15</span>
+println(rdd.reduce(_ min _)) <span class="cm">// 1</span>
+
+<span class="cm">// fold — same return type, has zero value</span>
+println(rdd.fold(<span class="cn">0</span>)(_ + _))  <span class="cm">// 15</span>
+println(rdd.fold(<span class="cn">1</span>)(_ * _))  <span class="cm">// 120</span>
+
+<span class="cm">// aggregate — DIFFERENT return type (compute average)</span>
+<span class="ck">val</span> result = rdd.aggregate((<span class="cn">0</span>, <span class="cn">0</span>))(
+  (acc, v) => (acc._1 + v, acc._2 + <span class="cn">1</span>),    <span class="cm">// seqOp</span>
+  (a, b)   => (a._1 + b._1, a._2 + b._2)     <span class="cm">// combOp</span>
+)
+<span class="ck">val</span> avg = result._1 / result._2.toDouble
+println(s<span class="cs">"Avg = $avg"</span>)  <span class="cm">// Avg = 3.0</span></pre>
+</div>
+</div>
+
+<div class="card pl">
+<div class="card-title"><span class="badge b-pyq">PYQ x2</span>P4 — Mutable Map with student scores</div>
+<div class="card-body">
+<pre><span class="cm">// Immutable Map</span>
+<span class="ck">val</span> immScores = <span class="cn">Map</span>(<span class="cs">"Alice"</span> -> <span class="cn">80</span>, <span class="cs">"Bob"</span> -> <span class="cn">75</span>, <span class="cs">"Cindy"</span> -> <span class="cn">90</span>)
+
+<span class="cm">// Mutable copy</span>
+<span class="ck">val</span> mutScores = scala.collection.mutable.<span class="cn">Map</span>(immScores.toSeq: _*)
+mutScores(<span class="cs">"Dave"</span>) = <span class="cn">85</span>    <span class="cm">// add new</span>
+mutScores(<span class="cs">"Bob"</span>) = <span class="cn">88</span>     <span class="cm">// update</span>
+
+<span class="cm">// Add bonus +5 to all</span>
+<span class="ck">val</span> withBonus = mutScores.map { <span class="ck">case</span> (k, v) => (k, v + <span class="cn">5</span>) }
+
+<span class="cm">// Filter > 50</span>
+withBonus.filter(_._2 > <span class="cn">50</span>).foreach { <span class="ck">case</span> (n, s) => println(s<span class="cs">"$n: $s"</span>) }</pre>
+</div>
+</div>
+
+<div class="card gl">
+<div class="card-title"><span class="badge b-pyq">PYQ</span>P5 — Exception handling (throw + try)</div>
+<div class="card-body">
+<pre><span class="ck">object</span> ExceptionDemo {
+  <span class="ck">def</span> divide(a: <span class="cn">Int</span>, b: <span class="cn">Int</span>): <span class="cn">Int</span> = {
+    <span class="ck">if</span> (b == <span class="cn">0</span>) <span class="ck">throw new</span> ArithmeticException(<span class="cs">"Division by zero!"</span>)
+    a / b
+  }
+  <span class="ck">def</span> main(args: <span class="cn">Array</span>[<span class="cn">String</span>]): <span class="cn">Unit</span> = {
+    <span class="ck">try</span> {
+      println(divide(<span class="cn">10</span>, <span class="cn">2</span>))  <span class="cm">// 5</span>
+      println(divide(<span class="cn">10</span>, <span class="cn">0</span>))  <span class="cm">// throws!</span>
+    } <span class="ck">catch</span> {
+      <span class="ck">case</span> e: ArithmeticException => println(<span class="cs">"Error: "</span> + e.getMessage)
+      <span class="ck">case</span> e: Exception            => println(<span class="cs">"Unknown error"</span>)
+    } <span class="ck">finally</span> {
+      println(<span class="cs">"Finally always runs"</span>)
+    }
+  }
+}</pre>
+</div>
+</div>
+
+<div class="card yl">
+<div class="card-title"><span class="badge b-pyq">PYQ</span>P6 — Words starting with 'a', ascending count</div>
+<div class="card-body">
+<pre><span class="ck">val</span> rdd = sc.textFile(<span class="cs">"test.txt"</span>)
+<span class="ck">val</span> rdd2 = rdd.flatMap(f => f.split(<span class="cs">" "</span>))
+<span class="ck">val</span> rdd3 = rdd2.map(m => (m, <span class="cn">1</span>))
+<span class="ck">val</span> rdd4 = rdd3.filter(a => a._1.startsWith(<span class="cs">"a"</span>))
+<span class="ck">val</span> rdd5 = rdd4.reduceByKey(_ + _)
+<span class="ck">val</span> rdd6 = rdd5.map(a => (a._2, a._1)).sortByKey()
+rdd6.foreach(println)</pre>
+</div>
+</div>
+
+<div class="card al">
+<div class="card-title"><span class="badge b-pyq">PYQ</span>P7 — Generic search function</div>
+<div class="card-body">
+<pre><span class="ck">def</span> searchItem[T](collection: Seq[T], item: T): <span class="cn">Boolean</span> = {
+  collection.contains(item)
+}
+
+<span class="cm">// Linear search returning index</span>
+<span class="ck">def</span> linearSearch(arr: <span class="cn">Array</span>[<span class="cn">Int</span>], target: <span class="cn">Int</span>): <span class="cn">Int</span> = {
+  <span class="ck">for</span> (i <- arr.indices) {
+    <span class="ck">if</span> (arr(i) == target) <span class="ck">return</span> i
+  }
+  -<span class="cn">1</span>
+}
+
+println(searchItem(<span class="cn">Seq</span>(<span class="cn">1</span>,<span class="cn">2</span>,<span class="cn">3</span>), <span class="cn">3</span>))  <span class="cm">// true</span>
+println(linearSearch(<span class="cn">Array</span>(<span class="cn">101</span>,<span class="cn">205</span>,<span class="cn">309</span>), <span class="cn">205</span>)) <span class="cm">// 1</span></pre>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title"><span class="badge b-pyq">PYQ</span>P8 — Odd / Even 1 to 100</div>
+<div class="card-body">
+<pre><span class="ck">object</span> OddEven {
+  <span class="ck">def</span> printOdd(): <span class="cn">Unit</span> = <span class="ck">for</span>(i <- <span class="cn">1</span> to <span class="cn">100</span> <span class="ck">if</span> i%<span class="cn">2</span>!=<span class="cn">0</span>) print(s<span class="cs">"$i "</span>)
+  <span class="ck">def</span> printEven(): <span class="cn">Unit</span> = <span class="ck">for</span>(i <- <span class="cn">1</span> to <span class="cn">100</span> <span class="ck">if</span> i%<span class="cn">2</span>==<span class="cn">0</span>) print(s<span class="cs">"$i "</span>)
+  <span class="ck">def</span> main(args: <span class="cn">Array</span>[<span class="cn">String</span>]): <span class="cn">Unit</span> = {
+    println(<span class="cs">"Odd:"</span>); printOdd()
+    println(<span class="cs">"\nEven:"</span>); printEven()
+  }
+}</pre>
+</div>
+</div>
+
+<div class="card gl">
+<div class="card-title"><span class="badge b-pyq">PYQ</span>P9 — Sum of comma-separated numbers (Spark)</div>
+<div class="card-body">
+<pre><span class="ck">val</span> nums = sc.textFile(<span class="cs">"numbers.txt"</span>)
+              .flatMap(_.split(<span class="cs">","</span>))
+              .map(_.trim.toInt)
+println(<span class="cs">"Sum = "</span> + nums.reduce(_ + _))</pre>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title"><span class="badge b-pyq">PYQ</span>P10 — Lazy val vs val vs def demo</div>
+<div class="card-body">
+<pre><span class="cm">// val — evaluated at definition time</span>
+<span class="ck">val</span> a = { println(<span class="cs">"val evaluated"</span>); <span class="cn">42</span> }
+<span class="cm">// prints "val evaluated" IMMEDIATELY</span>
+
+<span class="cm">// lazy val — evaluated first time accessed</span>
+<span class="ck">lazy val</span> b = { println(<span class="cs">"lazy val evaluated"</span>); <span class="cn">42</span> }
+<span class="cm">// nothing printed yet</span>
+println(b)
+<span class="cm">// NOW prints "lazy val evaluated", then 42</span>
+println(b)
+<span class="cm">// prints just 42 (already evaluated and cached)</span>
+
+<span class="cm">// def — evaluated every time called</span>
+<span class="ck">def</span> c = { println(<span class="cs">"def evaluated"</span>); <span class="cn">42</span> }
+println(c)  <span class="cm">// prints "def evaluated", 42</span>
+println(c)  <span class="cm">// prints "def evaluated", 42 (again!)</span></pre>
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
