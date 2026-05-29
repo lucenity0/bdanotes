@@ -1,0 +1,358 @@
+     Apache Cassandra – An Introduction
+• Apache Cassandra was born at Facebook. After Facebook open
+  sourced the code in 2008, Cassandra became an Apache Incubator
+  project in 2009 and subsequently became a top-level Apache project
+  in 2010.
+
+
+• It is a column-oriented database designed to support peer-to-peer
+  symmetric nodes instead of the master−slave architecture.
+
+• It is built on Amazon’s dynamo and Google’s BigTable.
+
+• It is highly scalable, high performance distributed database
+
+• It is column oriented database designed to support peer to peer
+  network
+
+• Adherance to availability and partition tolerance of CAP
+                       Big Data and Analytics by Seema Acharya and
+                                  Subhashini Chellappan
+                          Copyright 2015, WILEY INDIA PVT. LTD.
+ Features:
+1. Peer to Peer Network
+                -Designed to distribute and manage large data
+                loads across multiple nodes in a cluster
+                constituted of commodity hardware
+
+                -Does     NOT    have     a    master       slave
+                architecture-NOT have a single point of failure
+
+                -Graceful degradation where everything does
+                not come crashing at any instant owing a node
+                failure
+
+                - Ensures data is distributed across all nodes in
+                  the cluster
+
+                - Each node exchange information across the
+                  cluster every second
+2.   Gossip and Failure Detection
+     • Gossip protocol is used for intra ring communication
+
+     • Peer to peer communication protocol which eases the
+       discovery and sharing of location and state information with
+       other nodes in the cluster
+
+     • A node only has to send out the communication to a subset
+       of other nodes
+3. Partitioner
+• A partioner takes a call on how to distribute data on the
+  various nodes in the cluster
+
+• It also determines the node on which to place the very first
+  copy of the data
+
+• A partitioner is a hash function is used to compute the token
+  of the partion key
+4. Replication factor
+Node Node is the place where data is stored. It is the basic
+component of Cassandra.
+
+Data Center A collection of nodes are called data center.
+Many nodes are categorized as a data center.
+                            rti
+
+Cluster The cluster is the collection of many data centers.
+As hardware problem can occur or link can be down at any time
+during data process, a solution is required to provide a backup when
+the problem has occurred.
+
+So data is replicated for assuring no single point of failure.
+
+Cassandra places replicas of data on different nodes based on these
+two factors.
+
+1. Where to place next replica is determined by the Replication
+Strategy.
+
+2.While the total number of replicas placed on different nodes is
+determined by the Replication Factor.
+
+One Replication factor means that there is only a single copy of data
+while three replication factor means that there are three copies of the
+data on three different nodes.
+    There are two kinds of replication strategies in Cassandra.
+1. SimpleStrategy
+
+•SimpleStrategy is used when you have just one data center.
+
+•SimpleStrategy places the first replica on the node selected by the
+ partitioner.
+
+•After that, remaining replicas are placed in clockwise direction in
+ the Node ring.
+
+•Here is the pictorial representation of the SimpleStrategy.
+2. NetworkTopologyStrategy
+
+•NetworkTopologyStrategy is used when you have more than two
+ data centers.
+
+•In NetworkTopologyStrategy, replicas are set for each data center
+ separately.
+
+•NetworkTopologyStrategy places replicas in the clockwise direction
+ in the ring until reaches the first node in another rack.
+
+•This strategy tries to place replicas on different racks in the same
+ data center.
+•This is due to the reason that sometimes failure or problem
+ can occur in the rack. Then replicas on other nodes can
+ provide data.
+
+•Here is the pictorial representation of the Network topology
+ strategy
+•Read consistency means how many replicas must respond before sending out
+the result to client application
+
+•Write consistency is how many replicas write must succeed before sending out
+an acknowledgement to the client application
+5. Anti Entropy and Read Repair
+
+•A client can connect to any node in the cluster to read data
+
+•How many nodes will be read before responding to the client is
+based on the Consistency level specified by the client
+
+• If few of the nodes respond with an out of date value Cassandra
+will initiate a read repair to bring the replicas with stale values up
+to date
+
+•This is done using Anti Entropy gossip protocol.
+
+•Anti entropy implies comparing all the replicas of each piece of
+data and updating each replica to the newest version
+6. Write operation in Cassandra
+
+• When write request comes to the node, first of all, it logs in the commit
+log. Commit log is used for crash recovery.
+
+ • After data written in Commit log, data is written in Mem-table
+
+• Data written in the mem-table on each write request also writes in commit
+ log separately.
+
+•Mem-table is a temporarily stored data in the memory while Commit log
+ logs the transaction records for back up purposes or crash recovery
+
+•When mem-table is full, data is flushed to the SSTable data file.
+               7. Hinted Handoffs
+                                                                       Three nodes A,B, C
+
+                                                                       C is down
+                                 Coordinator
+                                                   Node C is down.
+                                               Write a hint in your
+                                                                       Replication factor is 2
+                                               table
+                                     A
+                                                                             Write operation on node A
+          Writes Row K
+                                                            Replicates Row K which is the coordinator and
+ Client           System hints
+                  table
+                                                                             serves as a proxy
+                                      B
+                                                                       When row k is wriiten by the
+                                                                       client to Node A, it will write
+                                                                       row K to node B and stores a
+                                      C                                hint for Node C.
+
+
+ Hint has the following information
+1. Location of the node on which replica is to be placed
+2. Version Mtada
+3. Actual data
+  8. Tunable Consistency
+
+  Strong Consistency- Each update propagates to all location where that piece
+  of data resides
+
+  Eventual Consistency- Client is acknowledged with success as soon as part of
+  the cluster acknowledges the write
+
+
+
+
+Big Data and Analytics by Seema Acharya and
+           Subhashini Chellappan
+   Copyright 2015, WILEY INDIA PVT. LTD.
+              Read Consistency
+
+    ONE                                  Returns a response from the closest node (replica)
+                                         holding the data.
+    QUORUM                               Returns a result from a quorum of servers with the
+                                         most recent timestamp for the data.
+    LOCAL_QUORUM                         Returns a result from a quorum of servers with the
+                                         most recent timestamp for the data in the same data center as
+                                         the coordinator node.
+    EACH_QUORUM                          Returns a result from a quorum of servers with the
+                                         most recent timestamp in all data centers.
+    ALL                                  This provides the highest level of consistency of all
+                                         levels and the lowest level of availability of all levels. It responds
+                                         to a read request from a client after all the replica nodes have
+                                         responded.
+
+
+Big Data and Analytics by Seema Acharya and
+           Subhashini Chellappan
+   Copyright 2015, WILEY INDIA PVT. LTD.
+          Write Consistency
+    ALL                        This is the highest level of consistency of all levels as it necessitates that a write
+                               must be written to the commit log and Memtable on all replica nodes in the cluster.
+
+
+    EACH_QUORUM                A write must be written to the commit log and Memtable on a quorum
+                               of replica nodes in all data centers.
+    QUORUM                     A write must be written to the commit log and Memtable on a quorum of replica nodes.
+
+
+    LOCAL_QUORUM               A write must be written to the commit log and Memtable on a quorum of replica nodes in
+                               the same data center as the coordinator node. This is to avoid latency of inter-data
+                               center communication.
+
+    ONE                        A write must be written to the commit log and Memtable of at least one
+                               replica node.
+    TWO                        A write must be written to the commit log and Memtable of at least two replica
+                               nodes.
+    THREE                      A write must be written to the commit log and Memtable of at least three replica
+                               nodes.
+    LOCAL_ONE                  A write must be sent to, and successfully acknowledged by, at least one
+                               replica node in the local data center.
+
+Big Data and Analytics by Seema Acharya and
+           Subhashini Chellappan
+   Copyright 2015, WILEY INDIA PVT. LTD.
+Cassandra - Data Model
+
+The data model of Cassandra is significantly different from what we normally see in an RDBMS.
+
+Cluster
+Cassandra database is distributed over several machines that operate together.
+
+The outermost container is known as the Cluster.
+
+ For failure handling, every node contains a replica, and in case of a failure, the replica takes charge.
+
+Cassandra arranges the nodes in a cluster, in a ring format, and assigns data to them.
+Keyspace
+
+Keyspace is the outermost container for data in Cassandra. The basic attributes of a Keyspace in Cassandra are −
+
+Replication factor − It is the number of machines in the cluster that will receive copies of the same data.
+
+Replica placement strategy − It is nothing but the strategy to place replicas in the ring. We have strategies such
+as simple strategy (rack-aware strategy), old network topology strategy (rack-aware strategy), and network topology
+strategy (datacenter-shared strategy).
+
+Column families − Keyspace is a container for a list of one or more column families.
+                 A column family, in turn, is a container of a collection of rows.
+                  Each row contains ordered columns.
+                  Column families represent the structure of your data.
+                  Each keyspace has at least one and often many column families.
+The syntax of creating a Keyspace is as follows −
+
+CREATE KEYSPACE Keyspace name WITH replication = {'class':
+'SimpleStrategy', 'replication_factor' : 3};
+
+The following illustration shows a schematic view of a Keyspace.
+     Column Family
+
+     A column family is a container for an ordered collection of rows. Each row,
+     in turn, is an ordered collection of columns
+
+
+The following figure shows an example of a Cassandra column family.
+The following table lists down the points that differentiate the data model of Cassandra from that of an RDBMS.
+
+
+
+                     RDBMS                              Cassandra
+                     RDBMS deals with                   Cassandra deals with
+                     structured data.                   unstructured data.
+                     It has a fixed schema.             Cassandra has a flexible
+                                                        schema.
+                     In RDBMS, a table is an            In Cassandra, a table is a
+                     array of arrays. (ROW x            list of “nested key-value
+                     COLUMN)                            pairs”. (ROW x COLUMN
+                                                        key x COLUMN value)
+                     Database is the outermost Keyspace is the outermost
+                     container that contains data container that contains data
+                     corresponding to an          corresponding to an
+                     application.                 application.
+                     Tables are the entities of a       Tables or column families
+                     database.                          are the entity of a
+                                                        keyspace.
+                     Row is an individual record Row is a unit of replication
+                     in RDBMS.                   in Cassandra.
+                     Column represents the              Column is a unit of storage
+                     attributes of a relation.          in Cassandra.
+                     RDBMS supports the                 Relationships are
+                     concepts of foreign keys,          represented using
+                     joins.                             collections.
+10:001,12:002,11:003,22:004;
+Smith:001,Jones:002,Johnson:003,Jones:004;
+Joe:001,Mary:002,Cathy:003,Bob:004;
+60000:001,80000:002,94000:003,55000:004;
+Set
+  What Cassandra does not support
+  There are following limitations in Cassandra query language (CQL).
+1.CQL does not support aggregation queries like max, min, avg
+2.CQL does not support group by, having queries.
+3.CQL does not support joins.
+4.CQL does not support OR queries.
+5.CQL does not support wildcard queries.
+6.CQL does not support Union, Intersection queries.
+7.Table columns cannot be filtered without creating the index.
+8.Greater than (>) and less than (<) query is only supported on clustering column.Cassandra query
+  language is not suitable for analytics purposes because it has so many limitations.
+
+
+
+
+        Create keyspace University
+Create keyspace University with
+replication={'class':SimpleStrategy,'replication_factor'
+: 3};
+
+
+Create Student Table Student Rollno, Name, Dept
+Alter table to add semester
+‘Alter Table’ that will add new column in the table Student.
+
+
+
+
+                 Describe the table contents
+Insert the values into table and update student
+name of rollno 18
+Delete the contents of rollno 1
+Select all CS dept students
+Remove index
+Create Teacher Table- Id, Name, Email
+Set collection that store multiple email addresses for the
+teacher.
+Add Courses to Teacher table
+insert in column “coursenames”.
+shows the current database state
+after insertion.
+ Write query when you want to save
+course name with its prerequisite course
+name
+ data is being inserted in map collection
+type
+Remove the contents of table
+Drop table and Keyspace
+Drop keyspace University;
+

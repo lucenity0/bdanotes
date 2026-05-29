@@ -5,30 +5,20 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-HTML_FILES = [ROOT / "bda_study.html", ROOT / "sjnjkwv.txt"]
+HTML_FILES = [ROOT / "index.html", ROOT / "bda_study.html", ROOT / "sjnjkwv.txt"]
 TEXT_DIR = ROOT / "class_notebook" / "text"
 PDF_DIR = ROOT / "class_notebook" / "pdf"
 SLIDE_DIR = ROOT / "class_notebook" / "slides"
 
 
 DOCS = [
-    ("src-syllabus", "BDA Syllabus", "2026-05-28-BDA-syllabus-pdf"),
-    ("src-unit-1", "Unit 1: Big Data Basics", "2026-05-28-Unit-1-UpdatedD-pptx"),
-    ("src-unit-2-mongodb", "Unit 2: MongoDB", "2026-05-28-Unit-2-MongoDB-PPT-pptx"),
-    ("src-cassandra-ppt", "Unit 3: Cassandra PPT", "2026-05-28-Cassandra-PPT-pptx"),
-    ("src-cassandra-bda", "Unit 3: Cassandra BDA Notes", "2026-05-28-Cassandra-BDA-docx"),
-    ("src-hadoop", "Unit 4: Hadoop Textbook PPT", "2026-05-28-Hadoop-According-to-new-TextBook-pptx"),
-    ("src-yarn", "Unit 4: YARN Working", "2026-05-28-YARN-WORKING-pdf"),
-    ("src-wordcount", "Unit 4: WordCount Program", "2026-05-28-Wordcountprogram-docx"),
-    ("src-mean-max", "Unit 4: Mean Max Temperature", "2026-05-28-MeanMaxTemp-docx"),
-    ("src-jar-steps", "Unit 4: Ubuntu/JAR File Steps", "2026-05-28-Ubuntu-Jar-File-Creation-Steps-1-1-docx"),
-    ("src-scala", "Unit 5: Scala PPT", "2026-05-28-scala-pptx"),
-    ("src-spark", "Unit 5: Spark PPT", "2026-05-28-Spark-pptx"),
-    ("src-spark-sql", "Unit 5: Spark SQL PPT", "2026-05-28-Spark-SQL-pptx"),
-    ("src-spark-streaming", "Unit 5: Spark Streaming Program", "2026-05-28-lab-program-10-Spark-Streaming-Program-Scala-docx"),
-    ("src-top-n", "Lab: Top N Program", "2026-05-28-topN-program-docx"),
-    ("src-lab-programs", "Lab: Explanation of Programs", "2026-05-28-Explanation-Lab-Programs-pptx-1-pptx"),
-    ("src-extra-questions", "Extra Questions", "2026-05-28-Extra-Question-pdf"),
+  ("src-unit-1", "Unit 1", "unit-1_bda"),
+  ("src-unit-2", "Unit 2", "unit-2_bda"),
+  ("src-unit-3", "Unit 3", "unit-3_bda"),
+  ("src-unit-4", "Unit 4 (Hadoop in Unit 3)", "unit-4_bda"),
+  ("src-unit-5a", "Unit 5A", "unit-5a_bda"),
+  ("src-unit-5b", "Unit 5B", "unit-5b_bda"),
+  ("src-unit-5c", "Unit 5C", "unit-5c_bda"),
 ]
 
 
